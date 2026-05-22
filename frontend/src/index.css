@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --jamaica-green: #009B3A;
+  --jamaica-gold: #FED100;
+  --jamaica-black: #000000;
+  --jamaica-white: #ffffff;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  @apply bg-white text-gray-800 antialiased;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-[color:var(--jamaica-green)] text-white hover:bg-emerald-700;
+}
+
+.btn-outline {
+  @apply border border-[color:var(--jamaica-green)] text-[color:var(--jamaica-green)] hover:bg-[color:var(--jamaica-green)] hover:text-white;
+}
