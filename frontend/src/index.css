@@ -97,11 +97,11 @@ textarea {
   justify-content: center;
   gap: 8px;
   border-radius: 999px;
-  border: 0;
+  border: 1px solid transparent;
   padding: 12px 18px;
   font-weight: 900;
   line-height: 1;
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
   cursor: pointer;
 }
 
@@ -112,6 +112,7 @@ textarea {
 .btn-primary {
   color: #ffffff;
   background: linear-gradient(135deg, var(--green), #00b85a);
+  border-color: rgba(0, 155, 58, 0.25);
   box-shadow: 0 14px 30px rgba(0, 155, 58, 0.24);
 }
 
@@ -120,13 +121,30 @@ textarea {
 }
 
 .btn-outline {
-  color: var(--green-dark);
+  color: var(--ink);
   background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(0, 155, 58, 0.22), 0 8px 20px rgba(15, 23, 42, 0.05);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
 }
 
 .btn-outline:hover {
-  background: var(--soft-green);
+  color: var(--green-dark);
+  background: #f8fafc;
+  border-color: rgba(0, 155, 58, 0.45);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+}
+
+.btn.bg-white {
+  color: var(--ink);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.btn.bg-white:hover {
+  background: #f8fafc;
+  border-color: rgba(0, 155, 58, 0.45);
+  color: var(--green-dark);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
 }
 
 .btn-dark {

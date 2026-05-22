@@ -80,8 +80,14 @@ export default function EmergencyAlertsSection() {
           <div className="rounded-3xl bg-white/10 p-4 ring-1 ring-white/10 backdrop-blur">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-yellow-200">Emergency contacts</p>
             <div className="mt-3 grid grid-cols-2 gap-3">
-              <a href="tel:119" className="rounded-2xl bg-white p-4 text-center font-black text-slate-950">119 Police</a>
-              <a href="tel:110" className="rounded-2xl bg-yellow-300 p-4 text-center font-black text-slate-950">110 EMS</a>
+              <a href="tel:119" className="rounded-2xl border border-white/80 bg-white p-4 text-center font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
+                <span className="mb-1 block text-xl">🚓</span>
+                119 Police
+              </a>
+              <a href="tel:110" className="rounded-2xl border border-yellow-200 bg-yellow-300 p-4 text-center font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-yellow-200">
+                <span className="mb-1 block text-xl">🚑</span>
+                110 EMS
+              </a>
             </div>
           </div>
         </div>

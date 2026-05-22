@@ -80,19 +80,20 @@ export default function Hero() {
 
         <div className="w-full max-w-[700px] justify-self-center lg:justify-self-end">
           <div className="overflow-hidden rounded-[2rem] bg-white/90 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.14)] ring-1 ring-white/80 backdrop-blur-xl">
-            <div className="rounded-[1.6rem] bg-slate-950 p-3 text-white">
+            <div className="rounded-[1.6rem] bg-gradient-to-br from-red-700 via-red-600 to-rose-700 p-3 text-white shadow-[0_20px_50px_rgba(185,28,28,0.28)]">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2 px-1">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.22em] text-yellow-300">Priority Alert</p>
-                  <p className="mt-1 text-sm font-bold text-white/75">Featured / Sponsored · Boosted visibility</p>
+                  <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-white">
+                    <span className="grid h-7 w-7 place-items-center rounded-full bg-white/18 text-base ring-1 ring-white/25">🚨</span>
+                    Priority Alert
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-white/85">Featured / Sponsored · Boosted visibility</p>
                 </div>
-                <span className={`badge ${statusStyles[priorityPerson.status] || statusStyles.missing}`}>
-                  {priorityPerson.status}
-                </span>
+                <span className="badge bg-white text-red-700 shadow-sm">Urgent</span>
               </div>
 
               <div key={priorityPerson.id} className="grid gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
-                <div className="overflow-hidden rounded-[1.35rem] bg-slate-800">
+                <div className="overflow-hidden rounded-[1.35rem] bg-red-950/25 ring-1 ring-white/15">
                   <div className="relative aspect-[4/3] h-full min-h-[250px]">
                     <img
                       src={priorityPerson.photo_url}
@@ -100,20 +101,20 @@ export default function Hero() {
                       className="h-full w-full object-cover"
                       loading="eager"
                     />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-4">
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-red-950/95 to-transparent p-4">
                       <p className="text-2xl font-black leading-tight">{priorityPerson.name}</p>
-                      <p className="mt-1 text-sm font-semibold text-white/80">
+                      <p className="mt-1 text-sm font-semibold text-white/85">
                         {priorityPerson.age} years · {priorityPerson.parish}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950">
+                <div className="flex flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950 shadow-lg">
                   <div>
                     <div className="flex flex-wrap gap-2">
-                      <span className="badge bg-yellow-100 text-yellow-900">Featured / Sponsored</span>
-                      <span className="badge bg-emerald-50 text-emerald-700">Boosted visibility</span>
+                      <span className="badge bg-red-50 text-red-700 ring-1 ring-red-100">Featured / Sponsored</span>
+                      <span className="badge bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200">Boosted visibility</span>
                     </div>
 
                     <div className="mt-5 space-y-4 text-sm">
@@ -129,9 +130,9 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-2xl bg-emerald-50 p-4">
-                    <p className="text-sm font-black text-emerald-800">Paid priority placement</p>
-                    <p className="mt-1 text-xs font-semibold leading-5 text-emerald-700">
+                  <div className="mt-5 rounded-2xl bg-red-50 p-4 ring-1 ring-red-100">
+                    <p className="text-sm font-black text-red-800">Paid priority placement</p>
+                    <p className="mt-1 text-xs font-semibold leading-5 text-red-700">
                       This alert is promoted at the top for faster community visibility.
                     </p>
                   </div>

@@ -51,13 +51,15 @@ export default function Footer() {
           <section className="w-full max-w-md justify-self-start rounded-3xl bg-white/10 p-5 ring-1 ring-white/10 backdrop-blur lg:justify-self-end">
             <h3 className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">Emergency contacts</h3>
             <div className="mt-4 grid grid-cols-2 gap-3">
-              <a href="tel:119" className="rounded-2xl bg-white p-4 text-center text-slate-950">
-                <span className="block text-2xl font-black">119</span>
-                <span className="text-xs font-bold text-slate-500">Police</span>
+              <a href="tel:119" className="rounded-2xl border border-white/80 bg-white p-4 text-center text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
+                <span className="block text-2xl">🚓</span>
+                <span className="mt-1 block text-2xl font-black">119</span>
+                <span className="text-xs font-bold text-slate-600">Police</span>
               </a>
-              <a href="tel:110" className="rounded-2xl bg-yellow-300 p-4 text-center text-slate-950">
-                <span className="block text-2xl font-black">110</span>
-                <span className="text-xs font-bold text-slate-600">Fire / EMS</span>
+              <a href="tel:110" className="rounded-2xl border border-yellow-200 bg-yellow-300 p-4 text-center text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-yellow-200">
+                <span className="block text-2xl">🚑</span>
+                <span className="mt-1 block text-2xl font-black">110</span>
+                <span className="text-xs font-bold text-slate-700">Fire / EMS</span>
               </a>
             </div>
 
