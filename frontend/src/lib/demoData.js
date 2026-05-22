@@ -15,89 +15,14 @@ export const parishes = [
   'St. Thomas',
 ];
 
-const profileSeeds = [
-  ['Aaliyah Brown', 14, 'Kingston', 'Half-Way-Tree Transport Centre', 'female', 12, 'missing'],
-  ['Dwayne Campbell', 28, 'St. James', 'Barnett Street, Montego Bay', 'male', 22, 'missing'],
-  ['Shanice Johnson', 22, 'St. Catherine', 'Portmore Pines', 'female', 30, 'missing'],
-  ['Omar Williams', 34, 'St. Catherine', 'Spanish Town Bus Terminal', 'male', 34, 'missing'],
-  ['Keisha Morgan', 19, 'St. Ann', 'Ocho Rios Market', 'female', 44, 'missing'],
-  ['Andre Blake', 41, 'Manchester', 'Ward Avenue, Mandeville', 'male', 45, 'missing'],
-  ['Tamara Reid', 31, 'Clarendon', 'May Pen town centre', 'female', 56, 'missing'],
-  ['Nicholas Grant', 16, 'St. Andrew', 'Papine Square', 'male', 16, 'missing'],
-  ['Latoya Henry', 27, 'Westmoreland', 'Savanna-la-Mar hospital area', 'female', 63, 'located'],
-  ['Kevon Miller', 12, 'Kingston', 'Downtown Parade', 'male', 51, 'urgent'],
-  ['Janelle Thompson', 35, 'Hanover', 'Lucea waterfront', 'female', 71, 'missing'],
-  ['Ricardo Ellis', 44, 'St. Elizabeth', 'Black River main road', 'male', 57, 'missing'],
-  ['Monique Foster', 25, 'Trelawny', 'Falmouth pier', 'female', 2, 'missing'],
-  ['Rohan McKenzie', 52, 'Portland', 'Port Antonio taxi stand', 'male', 5, 'missing'],
-  ['Brianna Clarke', 17, 'St. Mary', 'Highgate community centre', 'female', 5, 'urgent'],
-  ['Jason Patterson', 29, 'St. Thomas', 'Morant Bay courthouse area', 'male', 18, 'missing'],
-  ['Nadine Robinson', 39, 'Kingston', 'Cross Roads', 'female', 26, 'missing'],
-  ['Tyrone Bennett', 21, 'St. James', 'Fairview Shopping Centre', 'male', 26, 'missing'],
-  ['Sasha Gordon', 15, 'St. Catherine', 'Old Harbour Bay', 'female', 32, 'urgent'],
-  ['Damian Powell', 37, 'Clarendon', 'Mineral Heights', 'male', 37, 'missing'],
-  ['Chantel Davis', 24, 'Manchester', 'Northern Caribbean University gate', 'female', 37, 'missing'],
-  ['Jerome Walters', 33, 'St. Elizabeth', 'Santa Cruz taxi park', 'male', 40, 'missing'],
-  ['Simone Palmer', 42, 'Westmoreland', 'Negril town centre', 'female', 42, 'missing'],
-  ['Akeem Bailey', 18, 'Hanover', 'Green Island main road', 'male', 41, 'missing'],
-  ['Tanesha Smith', 30, 'St. Ann', 'Runaway Bay service station', 'female', 45, 'located'],
-  ['Malik Anderson', 13, 'St. Andrew', 'Liguanea Plaza', 'male', 47, 'urgent'],
-  ['Khadija Lawrence', 20, 'Portland', 'Buff Bay square', 'female', 48, 'missing'],
-  ['Wayne Morris', 55, 'Kingston', 'Heroes Circle', 'male', 48, 'missing'],
-  ['Danielle Stewart', 26, 'Trelawny', 'Duncans main road', 'female', 49, 'missing'],
-  ['Romaine Francis', 32, 'St. Mary', 'Annotto Bay bus stop', 'male', 50, 'missing'],
-  ['Marsha Edwards', 46, 'St. Thomas', 'Yallahs bridge area', 'female', 50, 'missing'],
-  ['Kemar Douglas', 23, 'St. Catherine', 'Linstead Market', 'male', 52, 'missing'],
-  ['Tricia Nelson', 28, 'Clarendon', 'Chapelton square', 'female', 52, 'missing'],
-  ['Devon Crawford', 60, 'Manchester', 'Christiana town centre', 'male', 53, 'missing'],
-  ['Kayla Graham', 11, 'Kingston', 'Mountain View Avenue', 'female', 53, 'urgent'],
-  ['Orlando Wright', 36, 'St. Ann', 'St. Ann’s Bay police station area', 'male', 54, 'missing'],
-  ['Renee Dixon', 33, 'St. James', 'Rose Hall main road', 'female', 55, 'missing'],
-  ['Michael Reid', 47, 'Westmoreland', 'Frome community field', 'male', 56, 'missing'],
-  ['Alicia Brooks', 21, 'Hanover', 'Sandy Bay square', 'female', 57, 'missing'],
-  ['Sheldon Hunter', 38, 'St. Elizabeth', 'Junction main road', 'male', 58, 'missing'],
-  ['Tiffany Brown', 18, 'St. Andrew', 'Constant Spring Road', 'female', 58, 'missing'],
-  ['Courtney James', 49, 'Portland', 'Manchioneal main road', 'male', 59, 'missing'],
-  ['Gabrielle Lewis', 16, 'St. Mary', 'Oracabessa main street', 'female', 59, 'urgent'],
-  ['Anthony Forbes', 58, 'St. Thomas', 'Bath fountain road', 'male', 60, 'missing'],
-  ['Melissa Gayle', 29, 'Kingston', 'New Kingston business district', 'female', 60, 'missing'],
-  ['Darren Hibbert', 31, 'St. Catherine', 'Greater Portmore gas station', 'male', 61, 'missing'],
-  ['Jody-Ann Richards', 23, 'Clarendon', 'Hayes community centre', 'female', 61, 'missing'],
-  ['Clive Bernard', 62, 'Manchester', 'Porus main road', 'male', 62, 'missing'],
-  ['Venessa Cole', 40, 'St. Elizabeth', 'Lacovia taxi stand', 'female', 62, 'missing'],
-  ['Junior McLeod', 27, 'St. James', 'Sam Sharpe Square', 'male', 63, 'missing'],
-  ['Abigail Cooper', 12, 'St. Ann', 'Discovery Bay main road', 'female', 64, 'urgent'],
-  ['Ryan Dixon', 35, 'Trelawny', 'Martha Brae community', 'male', 65, 'missing'],
-  ['Petra Wallace', 43, 'Westmoreland', 'Little London main road', 'female', 65, 'missing'],
-  ['Christopher Green', 19, 'Hanover', 'Hopewell transport centre', 'male', 66, 'missing'],
-  ['Kerry-Ann White', 34, 'Portland', 'Hope Bay main road', 'female', 66, 'missing'],
-  ['Marcus Sinclair', 45, 'Kingston', 'Maxfield Avenue', 'male', 67, 'missing'],
-  ['Sabrina Thomas', 27, 'St. Andrew', 'Manor Park Plaza', 'female', 67, 'missing'],
-  ['Leon Henry', 51, 'St. Mary', 'Port Maria square', 'male', 68, 'missing'],
-  ['Kiara Morris', 15, 'St. Thomas', 'Seaforth community', 'female', 68, 'urgent'],
-  ['Gavin Rose', 24, 'Clarendon', 'Four Paths main road', 'male', 69, 'missing'],
-  ['Camille Watson', 36, 'Manchester', 'Mandeville market', 'female', 69, 'missing'],
-  ['Patrick Allen', 57, 'St. Catherine', 'Bog Walk gorge entrance', 'male', 70, 'missing'],
-  ['Natasha Campbell', 32, 'St. James', 'Flankers community centre', 'female', 70, 'missing'],
-  ['Elijah Thompson', 17, 'St. Ann', 'Brown’s Town square', 'male', 71, 'urgent'],
-  ['Kimberly Hall', 25, 'Kingston', 'Waterhouse community centre', 'female', 72, 'missing'],
-  ['Marlon Spencer', 39, 'Portland', 'Boston Bay main road', 'male', 72, 'missing'],
-  ['Sade Martin', 22, 'St. Elizabeth', 'Treasure Beach main road', 'female', 73, 'missing'],
-  ['Joel Christie', 30, 'Trelawny', 'Wakefield community', 'male', 73, 'missing'],
-  ['Denise Walters', 54, 'Westmoreland', 'Bluefields main road', 'female', 74, 'missing'],
-  ['Paul Gordon', 46, 'St. Thomas', 'Cedar Valley road', 'male', 74, 'missing'],
-  ['Mikayla Francis', 13, 'St. Andrew', 'Red Hills Road', 'female', 75, 'urgent'],
-  ['Neville Scott', 63, 'Hanover', 'Lucea bus park', 'male', 75, 'missing'],
-];
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 
-const descriptions = [
-  'Family members are asking the public to share any verified sightings with authorities.',
-  'Last seen wearing casual clothing and carrying a small backpack.',
-  'Reported missing after leaving home and not returning by evening.',
-  'Known to frequent nearby shops, transport centres, and community spaces.',
-  'Relatives say this person may require medical attention and should be approached calmly.',
-  'Anyone with information is urged to contact the listed number or the nearest police station.',
-];
+const daysAgo = (days) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
 const femalePortraits = [
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=90',
@@ -121,15 +46,56 @@ const malePortraits = [
   'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=90',
 ];
 
-const daysAgo = (days) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-
 const photoFor = (gender, imageId) => {
   const portraits = gender === 'female' ? femalePortraits : malePortraits;
   return portraits[imageId % portraits.length];
 };
 
-export const demoMissingPersons = profileSeeds.map(([name, age, parish, lastSeen, gender, imageId, status], index) => ({
+const profileSeeds = [
+  ['Aaliyah Brown', 14, 'Kingston', 'Half-Way-Tree Transport Centre', 'female', 12, 'missing', true],
+  ['Dwayne Campbell', 28, 'St. James', 'Barnett Street, Montego Bay', 'male', 22, 'missing', false],
+  ['Shanice Johnson', 22, 'St. Catherine', 'Portmore Pines', 'female', 30, 'missing', true],
+  ['Omar Williams', 34, 'St. Catherine', 'Spanish Town Bus Terminal', 'male', 34, 'missing', false],
+  ['Keisha Morgan', 19, 'St. Ann', 'Ocho Rios Market', 'female', 44, 'missing', false],
+  ['Andre Blake', 41, 'Manchester', 'Ward Avenue, Mandeville', 'male', 45, 'missing', false],
+  ['Tamara Reid', 31, 'Clarendon', 'May Pen town centre', 'female', 56, 'missing', false],
+  ['Nicholas Grant', 16, 'St. Andrew', 'Papine Square', 'male', 16, 'missing', false],
+  ['Latoya Henry', 27, 'Westmoreland', 'Savanna-la-Mar hospital area', 'female', 63, 'located', true],
+  ['Kevon Miller', 12, 'Kingston', 'Downtown Parade', 'male', 51, 'urgent', true],
+  ['Janelle Thompson', 35, 'Hanover', 'Lucea waterfront', 'female', 71, 'missing', false],
+  ['Ricardo Ellis', 44, 'St. Elizabeth', 'Black River main road', 'male', 57, 'missing', false],
+  ['Monique Foster', 25, 'Trelawny', 'Falmouth pier', 'female', 2, 'missing', false],
+  ['Rohan McKenzie', 52, 'Portland', 'Port Antonio taxi stand', 'male', 5, 'missing', false],
+  ['Brianna Clarke', 17, 'St. Mary', 'Highgate community centre', 'female', 5, 'urgent', true],
+  ['Jason Patterson', 29, 'St. Thomas', 'Morant Bay courthouse area', 'male', 18, 'missing', false],
+  ['Nadine Robinson', 39, 'Kingston', 'Cross Roads', 'female', 26, 'missing', false],
+  ['Tyrone Bennett', 21, 'St. James', 'Fairview Shopping Centre', 'male', 26, 'missing', false],
+  ['Sasha Gordon', 15, 'St. Catherine', 'Old Harbour Bay', 'female', 32, 'urgent', true],
+  ['Damian Powell', 37, 'Clarendon', 'Mineral Heights', 'male', 37, 'missing', false],
+  ['Chantel Davis', 24, 'Manchester', 'Northern Caribbean University gate', 'female', 37, 'missing', false],
+  ['Jerome Walters', 33, 'St. Elizabeth', 'Santa Cruz taxi park', 'male', 40, 'missing', false],
+  ['Simone Palmer', 42, 'Westmoreland', 'Negril town centre', 'female', 42, 'missing', false],
+  ['Akeem Bailey', 18, 'Hanover', 'Green Island main road', 'male', 41, 'missing', false],
+  ['Tanesha Smith', 30, 'St. Ann', 'Runaway Bay service station', 'female', 45, 'located', false],
+  ['Malik Anderson', 13, 'St. Andrew', 'Liguanea Plaza', 'male', 47, 'urgent', true],
+  ['Khadija Lawrence', 20, 'Portland', 'Buff Bay square', 'female', 48, 'missing', false],
+  ['Wayne Morris', 55, 'Kingston', 'Heroes Circle', 'male', 48, 'missing', false],
+  ['Danielle Stewart', 26, 'Trelawny', 'Duncans main road', 'female', 49, 'missing', false],
+  ['Romaine Francis', 32, 'St. Mary', 'Annotto Bay bus stop', 'male', 50, 'missing', false],
+];
+
+const descriptions = [
+  'Family members are asking the public to share any verified sightings with authorities.',
+  'Last seen wearing casual clothing and carrying a small backpack.',
+  'Reported missing after leaving home and not returning by evening.',
+  'Known to frequent nearby shops, transport centres, and community spaces.',
+  'Relatives say this person may require medical attention and should be approached calmly.',
+  'Anyone with information is urged to contact the listed number or the nearest police station.',
+];
+
+export const demoMissingPersons = profileSeeds.map(([name, age, parish, lastSeen, gender, imageId, status, priority], index) => ({
   id: 1000 + index,
+  slug: `${slugify(name)}-${1000 + index}`,
   name,
   age,
   parish,
@@ -137,9 +103,70 @@ export const demoMissingPersons = profileSeeds.map(([name, age, parish, lastSeen
   date_missing: daysAgo((index % 21) + 1),
   photo_url: photoFor(gender, imageId),
   status,
+  priority,
   contact_number: `876-${String(200 + (index % 700)).padStart(3, '0')}-${String(1000 + index * 37).slice(0, 4)}`,
   description: descriptions[index % descriptions.length],
+  report_tip_url: `mailto:tips@876alert.example?subject=Tip for ${encodeURIComponent(name)}`,
 }));
+
+export const sponsoredAds = [
+  {
+    id: 'ad-kingston-safety-mart',
+    type: 'ad',
+    businessName: 'Kingston Safety Mart',
+    parish: 'Kingston',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=90',
+    promo: 'Emergency kits, flashlights, radios, and first-aid supplies for families and community teams.',
+    ctaLabel: 'Shop Now',
+    ctaHref: '/ads',
+    badge: 'Paid Advertisement',
+  },
+  {
+    id: 'ad-island-secure',
+    type: 'ad',
+    businessName: 'Island Secure Systems',
+    parish: 'St. Andrew',
+    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=90',
+    promo: 'Affordable home cameras, panic buttons, and neighbourhood safety installations.',
+    ctaLabel: 'Learn More',
+    ctaHref: '/advertise',
+    badge: 'Paid Advertisement',
+  },
+  {
+    id: 'ad-route-safe-transport',
+    type: 'ad',
+    businessName: 'RouteSafe Transport',
+    parish: 'St. Catherine',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=90',
+    promo: 'Verified private transport for families, school pickups, and community search teams.',
+    ctaLabel: 'Book Now',
+    ctaHref: '/contact',
+    badge: 'Paid Advertisement',
+  },
+  {
+    id: 'ad-rapid-care-support',
+    type: 'ad',
+    businessName: 'RapidCare Support Jamaica',
+    parish: 'St. James',
+    image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=90',
+    promo: 'Emergency support supplies and response coordination for local events and businesses.',
+    ctaLabel: 'Call Now',
+    ctaHref: 'tel:8760000000',
+    badge: 'Paid Advertisement',
+  },
+];
+
+export const priorityCarouselItems = [
+  { id: 'priority-aaliyah-brown', type: 'missing', personId: 1000 },
+  sponsoredAds[0],
+  { id: 'priority-shanice-johnson', type: 'missing', personId: 1002 },
+  sponsoredAds[1],
+  { id: 'priority-latoya-henry', type: 'missing', personId: 1008 },
+  sponsoredAds[2],
+  { id: 'priority-kevon-miller', type: 'missing', personId: 1009 },
+  sponsoredAds[3],
+  { id: 'priority-brianna-clarke', type: 'missing', personId: 1014 },
+];
 
 export const demoAlerts = [
   {

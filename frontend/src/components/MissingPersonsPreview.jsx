@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../lib/api';
 import { demoMissingPersons, parishes } from '../lib/demoData';
 import SkeletonCard from './SkeletonCard';
@@ -9,12 +10,22 @@ const statusStyles = {
   located: 'bg-emerald-50 text-emerald-700',
 };
 
+const slugify = (value) =>
+  String(value)
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const personPath = (person) => `/missing/${person.slug || `${slugify(person.name)}-${person.id}`}`;
+
 function normalizeApiPerson(person, index) {
   const fallback = demoMissingPersons[index % demoMissingPersons.length];
 
   return {
     ...fallback,
     ...person,
+    slug: person.slug || fallback.slug || `${slugify(person.name || fallback.name)}-${person.id || fallback.id}`,
     parish: person.parish || fallback.parish,
     contact_number: person.contact_number || fallback.contact_number,
     photo_url: person.photo_url || fallback.photo_url,
@@ -132,7 +143,7 @@ export default function MissingPersonsPreview() {
                     </p>
 
                     <div className="mt-auto grid grid-cols-2 gap-2 pt-4">
-                      <button className="btn btn-outline !min-h-10 !px-3 !py-2 text-xs">View Details</button>
+                      <Link to={personPath(person)} className="btn btn-outline !min-h-10 !px-3 !py-2 text-xs">View Details</Link>
                       <a href={`tel:${person.contact_number}`} className="btn btn-primary !min-h-10 !px-3 !py-2 text-xs">Call</a>
                     </div>
                   </div>

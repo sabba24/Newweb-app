@@ -42,6 +42,7 @@ export default function Footer() {
             <nav className="mt-4 grid gap-3 text-sm font-semibold text-emerald-50/80">
               <Link to="/about" className="hover:text-white">About</Link>
               <Link to="/contact" className="hover:text-white">Contact</Link>
+              <Link to="/advertise" className="hover:text-white">Advertise</Link>
               <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
               <Link to="/terms" className="hover:text-white">Terms & Conditions</Link>
               <Link to="/setup" className="hover:text-white">Setup</Link>

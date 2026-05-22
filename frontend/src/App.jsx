@@ -9,6 +9,8 @@ import Terms from './pages/Terms';
 import SafetyTips from './pages/SafetyTips';
 import EmergencyResources from './pages/EmergencyResources';
 import Setup from './pages/Setup';
+import MissingPersonDetail from './pages/MissingPersonDetail';
+import Advertise from './pages/Advertise';
 
 export default function App() {
   return (
@@ -24,6 +26,10 @@ export default function App() {
         <Route path="/safety-tips" element={<SafetyTips />} />
         <Route path="/emergency-resources" element={<EmergencyResources />} />
         <Route path="/setup" element={<Setup />} />
+        <Route path="/missing/:id" element={<MissingPersonDetail />} />
+        <Route path="/advertise" element={<Advertise />} />
+        <Route path="/ads" element={<Advertise />} />
+        <Route path="/ads/:id" element={<Advertise />} />
       </Routes>
     </BrowserRouter>
   );
