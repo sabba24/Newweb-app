@@ -27,11 +27,11 @@ export default function Navbar() {
     }`;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/92 shadow-[0_1px_20px_rgba(15,23,42,0.06)] backdrop-blur-xl">
-      <div className="container-premium">
-        <div className="flex min-h-[76px] items-center justify-between gap-5">
-          <Link to="/" className="flex shrink-0 items-center" aria-label="876Alert home">
-            <img src={logo} alt="876Alert" className="h-[46px] w-[190px] object-contain" />
+    <header className="sticky top-0 z-50 w-full bg-white/92 shadow-[0_1px_22px_rgba(15,23,42,0.07)] backdrop-blur-xl">
+      <div className="container-nav">
+        <div className="grid min-h-[76px] grid-cols-[auto_1fr_auto] items-center gap-4">
+          <Link to="/" className="flex shrink-0 items-center justify-self-start" aria-label="876Alert home">
+            <img src={logo} alt="876Alert" className="h-[46px] w-[178px] object-contain" />
           </Link>
 
           <nav className="hidden items-center justify-center gap-1 lg:flex">
@@ -42,7 +42,7 @@ export default function Navbar() {
             <NavLink to="/contact" className={navClass}>Contact</NavLink>
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-2 lg:flex">
+          <div className="hidden shrink-0 items-center justify-self-end gap-2 lg:flex">
             {hasToken ? (
               <div className="relative">
                 <button onClick={() => setAccountOpen((value) => !value)} className="flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 text-sm font-black text-emerald-800 transition hover:bg-emerald-100">

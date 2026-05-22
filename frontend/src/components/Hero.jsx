@@ -5,12 +5,12 @@ export default function Hero() {
   const featured = demoMissingPersons.slice(0, 4);
 
   return (
-    <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f0fdf4_58%,#fff8d7_100%)]">
+    <section className="relative isolate w-full overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f0fdf4_58%,#fff8d7_100%)]">
       <div className="absolute left-[-12rem] top-[-12rem] -z-10 h-[32rem] w-[32rem] rounded-full bg-emerald-300/20 blur-3xl" />
       <div className="absolute right-[-10rem] top-20 -z-10 h-[28rem] w-[28rem] rounded-full bg-yellow-300/25 blur-3xl" />
 
-      <div className="container-premium grid min-h-[calc(100vh-76px)] items-center gap-12 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
-        <div className="max-w-3xl">
+      <div className="container-hero grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1fr_0.92fr] lg:gap-14 lg:py-20 xl:gap-20">
+        <div className="max-w-[720px] justify-self-start">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 shadow-sm ring-1 ring-emerald-100 backdrop-blur">
             <img src={logoMark} alt="" className="h-6 w-6" />
             Jamaica public safety platform
@@ -52,7 +52,7 @@ export default function Hero() {
           </dl>
         </div>
 
-        <div className="mx-auto w-full max-w-[34rem] lg:mx-0">
+        <div className="w-full max-w-[560px] justify-self-center lg:justify-self-end">
           <div className="rounded-[2rem] bg-white/86 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.12)] ring-1 ring-white/80 backdrop-blur-xl">
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2 overflow-hidden rounded-[1.5rem]">
