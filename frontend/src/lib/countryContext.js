@@ -1,3 +1,6 @@
+import { detectCountryFromBrowserLocale, detectInitialCountry } from './geoDetection';
+import { syncLanguageForCountryIfAllowed } from './languageContext';
+
 export const SELECTED_COUNTRY_STORAGE_KEY = 'selected_country_code';
 
 const totalsByCode = {
@@ -90,7 +93,6 @@ const countryRows = [
   ['AD', 'Andorra', '🇦🇩', '+376'],
   ['AO', 'Angola', '🇦🇴', '+244'],
   ['AI', 'Anguilla', '🇦🇮', '+1-264'],
-  ['AQ', 'Antarctica', '🇦🇶', '+672'],
   ['AG', 'Antigua and Barbuda', '🇦🇬', '+1-268'],
   ['AR', 'Argentina', '🇦🇷', '+54'],
   ['AM', 'Armenia', '🇦🇲', '+374'],
@@ -112,7 +114,6 @@ const countryRows = [
   ['BQ', 'Caribbean Netherlands', '🇧🇶', '+599'],
   ['BA', 'Bosnia and Herzegovina', '🇧🇦', '+387'],
   ['BW', 'Botswana', '🇧🇼', '+267'],
-  ['BV', 'Bouvet Island', '🇧🇻', '+47'],
   ['BR', 'Brazil', '🇧🇷', '+55'],
   ['IO', 'British Indian Ocean Territory', '🇮🇴', '+246'],
   ['VG', 'British Virgin Islands', '🇻🇬', '+1-284'],
@@ -162,7 +163,6 @@ const countryRows = [
   ['FR', 'France', '🇫🇷', '+33'],
   ['GF', 'French Guiana', '🇬🇫', '+594'],
   ['PF', 'French Polynesia', '🇵🇫', '+689'],
-  ['TF', 'French Southern Territories', '🇹🇫', '+262'],
   ['GA', 'Gabon', '🇬🇦', '+241'],
   ['GM', 'Gambia', '🇬🇲', '+220'],
   ['GE', 'Georgia', '🇬🇪', '+995'],
@@ -180,7 +180,6 @@ const countryRows = [
   ['GW', 'Guinea-Bissau', '🇬🇼', '+245'],
   ['GY', 'Guyana', '🇬🇾', '+592'],
   ['HT', 'Haiti', '🇭🇹', '+509'],
-  ['HM', 'Heard Island and McDonald Islands', '🇭🇲', '+672'],
   ['HN', 'Honduras', '🇭🇳', '+504'],
   ['HK', 'Hong Kong', '🇭🇰', '+852'],
   ['HU', 'Hungary', '🇭🇺', '+36'],
@@ -289,14 +288,12 @@ const countryRows = [
   ['SB', 'Solomon Islands', '🇸🇧', '+677'],
   ['SO', 'Somalia', '🇸🇴', '+252'],
   ['ZA', 'South Africa', '🇿🇦', '+27'],
-  ['GS', 'South Georgia and the South Sandwich Islands', '🇬🇸', '+500'],
   ['KR', 'South Korea', '🇰🇷', '+82'],
   ['SS', 'South Sudan', '🇸🇸', '+211'],
   ['ES', 'Spain', '🇪🇸', '+34'],
   ['LK', 'Sri Lanka', '🇱🇰', '+94'],
   ['SD', 'Sudan', '🇸🇩', '+249'],
   ['SR', 'Suriname', '🇸🇷', '+597'],
-  ['SJ', 'Svalbard and Jan Mayen', '🇸🇯', '+47'],
   ['SE', 'Sweden', '🇸🇪', '+46'],
   ['CH', 'Switzerland', '🇨🇭', '+41'],
   ['SY', 'Syria', '🇸🇾', '+963'],
@@ -319,7 +316,6 @@ const countryRows = [
   ['AE', 'United Arab Emirates', '🇦🇪', '+971'],
   ['GB', 'United Kingdom', '🇬🇧', '+44'],
   ['US', 'United States', '🇺🇸', '+1'],
-  ['UM', 'United States Minor Outlying Islands', '🇺🇲', '+1'],
   ['VI', 'United States Virgin Islands', '🇻🇮', '+1-340'],
   ['UY', 'Uruguay', '🇺🇾', '+598'],
   ['UZ', 'Uzbekistan', '🇺🇿', '+998'],
@@ -355,8 +351,35 @@ export const SUPPORTED_COUNTRIES = countryRows.map(([code, name, flag, phoneCode
   };
 });
 
+const supportedCountryCodes = SUPPORTED_COUNTRIES.map((country) => country.code);
+
 export function getSelectedCountryCode() {
-  return localStorage.getItem(SELECTED_COUNTRY_STORAGE_KEY) || 'JM';
+  const saved = localStorage.getItem(SELECTED_COUNTRY_STORAGE_KEY);
+
+  if (saved && supportedCountryCodes.includes(saved)) {
+    return saved;
+  }
+
+  const detected = detectCountryFromBrowserLocale(supportedCountryCodes) || 'JM';
+  localStorage.setItem(SELECTED_COUNTRY_STORAGE_KEY, detected);
+  syncLanguageForCountryIfAllowed(detected);
+
+  return detected;
+}
+
+export async function initializeSelectedCountry() {
+  const saved = localStorage.getItem(SELECTED_COUNTRY_STORAGE_KEY);
+
+  if (saved && supportedCountryCodes.includes(saved)) {
+    return saved;
+  }
+
+  const detected = await detectInitialCountry(supportedCountryCodes);
+  localStorage.setItem(SELECTED_COUNTRY_STORAGE_KEY, detected);
+  syncLanguageForCountryIfAllowed(detected);
+  window.dispatchEvent(new CustomEvent('country-change', { detail: detected }));
+
+  return detected;
 }
 
 export function getCountryByCode(code) {
@@ -370,6 +393,7 @@ export function getSelectedCountry() {
 export function setSelectedCountryCode(code) {
   const nextCode = getCountryByCode(code).code;
   localStorage.setItem(SELECTED_COUNTRY_STORAGE_KEY, nextCode);
+  syncLanguageForCountryIfAllowed(nextCode);
   window.dispatchEvent(new CustomEvent('country-change', { detail: nextCode }));
   return nextCode;
 }

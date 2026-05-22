@@ -32,6 +32,20 @@ body,
   min-height: 100%;
 }
 
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="rtl"] select,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+html[dir="rtl"] .ticker-track {
+  animation-direction: reverse;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;

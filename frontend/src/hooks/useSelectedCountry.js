@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
-import { getCountryByCode, getSelectedCountryCode, setSelectedCountryCode } from '../lib/countryContext';
+import { getCountryByCode, getSelectedCountryCode, initializeSelectedCountry, setSelectedCountryCode } from '../lib/countryContext';
 
 export default function useSelectedCountry() {
-  const [countryCode, setCountryCode] = useState(getSelectedCountryCode());
+  const [countryCode, setCountryCodeState] = useState(getSelectedCountryCode());
 
   useEffect(() => {
-    const syncCountry = () => setCountryCode(getSelectedCountryCode());
+    let mounted = true;
+
+    initializeSelectedCountry().then((detectedCode) => {
+      if (mounted) setCountryCodeState(detectedCode);
+    });
+
+    const syncCountry = () => setCountryCodeState(getSelectedCountryCode());
 
     window.addEventListener('storage', syncCountry);
     window.addEventListener('country-change', syncCountry);
 
     return () => {
+      mounted = false;
       window.removeEventListener('storage', syncCountry);
       window.removeEventListener('country-change', syncCountry);
     };

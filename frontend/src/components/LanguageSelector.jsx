@@ -10,7 +10,7 @@ export default function LanguageSelector() {
       <span className="sr-only">Select language</span>
       <select
         value={languageCode}
-        onChange={(event) => setLanguageCode(event.target.value)}
+        onChange={(event) => setLanguageCode(event.target.value, true)}
         className="max-w-[8.5rem] bg-transparent text-sm font-black text-slate-800 outline-none"
         aria-label="Select language"
       >

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { getLanguageByCode, getSelectedLanguageCode, setSelectedLanguageCode } from '../lib/languageContext';
 
 export default function useSelectedLanguage() {
-  const [languageCode, setLanguageCode] = useState(getSelectedLanguageCode());
+  const [languageCode, setLanguageCodeState] = useState(getSelectedLanguageCode());
 
   useEffect(() => {
-    const syncLanguage = () => setLanguageCode(getSelectedLanguageCode());
+    const syncLanguage = () => setLanguageCodeState(getSelectedLanguageCode());
 
     window.addEventListener('storage', syncLanguage);
     window.addEventListener('language-change', syncLanguage);
