@@ -14,7 +14,7 @@ export default function Register() {
     password: '',
     phone: '',
     location: '',
-    account_type: 'personal',
+    account_type: 'personal_free',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -29,11 +29,15 @@ export default function Register() {
         name: form.name,
         email: form.email,
         password: form.password,
+        account_type: form.account_type,
+        phone: form.phone,
+        location: form.location,
       };
 
       const { data } = await api.post('/register', payload);
       setAuthToken(data.token);
-      navigate('/');
+      localStorage.setItem('account_type', form.account_type);
+      navigate('/dashboard');
     } catch (err) {
       const msg = err?.response?.data?.message || (err?.response?.data?.errors && Object.values(err.response.data.errors)[0][0]);
       setError(msg || 'Registration failed');
@@ -52,13 +56,13 @@ export default function Register() {
             <AuthShowcase mode="register" />
 
             <section className="order-1 rounded-[2rem] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.13)] ring-1 ring-slate-100 sm:p-7 lg:order-2 lg:p-8">
-              <div className="mx-auto max-w-2xl">
+              <div className="mx-auto max-w-3xl">
                 <div className="mb-7">
                   <img src={logo} alt="876Alert" className="h-[44px] w-[184px] object-contain" />
                   <p className="mt-6 text-sm font-black uppercase tracking-[0.18em] text-emerald-700">Create account</p>
-                  <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Start your safety account.</h2>
+                  <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Choose your safety account.</h2>
                   <p className="mt-3 text-sm leading-6 text-slate-600">
-                    Choose how you plan to use 876Alert, then create your login. Optional profile details are saved for future onboarding and won’t interrupt account creation.
+                    Start free as a personal user, upgrade for more alert posting, or prepare business and agency access for paid tools coming next.
                   </p>
                 </div>
 
@@ -98,9 +102,9 @@ export default function Register() {
                   </div>
 
                   <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100">
-                    <p className="text-sm font-black text-slate-950">Trust & security note</p>
+                    <p className="text-sm font-black text-slate-950">Plan note</p>
                     <p className="mt-1 text-xs font-semibold leading-5 text-slate-600">
-                      876Alert is designed for responsible safety communication. Share verified details only and contact emergency services first for urgent danger.
+                      Personal Free includes 1 alert per month. Paid plan billing screens are prepared but payment processing is not connected yet.
                     </p>
                   </div>
 

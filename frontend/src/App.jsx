@@ -11,6 +11,8 @@ import EmergencyResources from './pages/EmergencyResources';
 import Setup from './pages/Setup';
 import MissingPersonDetail from './pages/MissingPersonDetail';
 import Advertise from './pages/Advertise';
+import Dashboard from './pages/Dashboard';
+import DashboardPlaceholder from './pages/DashboardPlaceholder';
 
 export default function App() {
   return (
@@ -30,6 +32,14 @@ export default function App() {
         <Route path="/advertise" element={<Advertise />} />
         <Route path="/ads" element={<Advertise />} />
         <Route path="/ads/:id" element={<Advertise />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/alerts" element={<DashboardPlaceholder type="alerts" />} />
+        <Route path="/dashboard/create-alert" element={<DashboardPlaceholder type="createAlert" />} />
+        <Route path="/dashboard/billing" element={<DashboardPlaceholder type="billing" />} />
+        <Route path="/dashboard/business-ads" element={<DashboardPlaceholder type="businessAds" />} />
+        <Route path="/dashboard/promotions" element={<DashboardPlaceholder type="promotions" />} />
+        <Route path="/dashboard/agency-license" element={<DashboardPlaceholder type="agencyLicense" />} />
+        <Route path="/dashboard/verified-reports" element={<DashboardPlaceholder type="verifiedReports" />} />
       </Routes>
     </BrowserRouter>
   );

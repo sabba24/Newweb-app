@@ -52,7 +52,7 @@ export default function Navbar() {
                   </button>
                   {accountOpen && (
                     <div className="absolute right-0 mt-3 w-56 rounded-2xl bg-white p-2 shadow-2xl ring-1 ring-slate-100">
-                      <Link to="/" onClick={() => setAccountOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50">Dashboard</Link>
+                      <Link to="/dashboard" onClick={() => setAccountOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50">Dashboard</Link>
                       <Link to="/setup" onClick={() => setAccountOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50">Setup status</Link>
                       <button onClick={logout} className="w-full rounded-xl px-4 py-3 text-left text-sm font-bold text-red-600 hover:bg-red-50">Logout</button>
                     </div>
@@ -91,7 +91,10 @@ export default function Navbar() {
 
               <div className="mt-3 grid gap-2 border-t border-slate-100 pt-3 sm:grid-cols-2">
                 {hasToken ? (
-                  <button onClick={logout} className="btn btn-outline sm:col-span-2">Logout</button>
+                  <>
+                    <Link to="/dashboard" onClick={() => setOpen(false)} className="btn btn-primary">Dashboard</Link>
+                    <button onClick={logout} className="btn btn-outline">Logout</button>
+                  </>
                 ) : (
                   <>
                     <Link to="/login" onClick={() => setOpen(false)} className="btn btn-outline">Login</Link>
