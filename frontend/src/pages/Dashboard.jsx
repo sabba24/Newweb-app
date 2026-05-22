@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import DashboardShell from '../components/DashboardShell';
+import AgencyOperationsCenter from '../components/AgencyOperationsCenter';
 
 const planLimits = {
   personal_free: { used: 1, limit: 1, label: '1 free alert per month' },
@@ -12,6 +13,10 @@ export default function Dashboard() {
   return (
     <DashboardShell title="Welcome to your 876Alert dashboard">
       {({ accountType, accountLabel }) => {
+        if (accountType === 'agency') {
+          return <AgencyOperationsCenter />;
+        }
+
         const plan = planLimits[accountType] || planLimits.personal_free;
         const usagePercent = Math.min(100, Math.round((plan.used / plan.limit) * 100));
         const freeLimitReached = accountType === 'personal_free' && plan.used >= plan.limit;

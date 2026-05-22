@@ -1,4 +1,5 @@
 import DashboardShell from '../components/DashboardShell';
+import AgencyRoutePanel from '../components/AgencyRoutePanel';
 
 const content = {
   alerts: {
@@ -38,7 +39,34 @@ const content = {
   },
 };
 
+const agencyTitles = {
+  activeIncidents: ['Incident command queue', 'Active incidents'],
+  verifiedReports: ['Verification command desk', 'Verified reports'],
+  missingPersons: ['Missing-person response board', 'Missing persons'],
+  emergencyBroadcasts: ['Public alert transmission center', 'Emergency broadcasts'],
+  responders: ['Responder availability grid', 'Responders'],
+  dispatchQueue: ['Dispatch operations queue', 'Dispatch queue'],
+  surveillanceRequests: ['Surveillance and intelligence requests', 'Surveillance requests'],
+  communityReports: ['Community intelligence intake', 'Community reports'],
+  emergencyHotlines: ['Hotline monitoring panel', 'Emergency hotlines'],
+  agencyLicense: ['Agency license command', 'Agency license'],
+  billing: ['Agency billing readiness', 'Billing'],
+  settings: ['Secure agency settings', 'Settings'],
+};
+
 export default function DashboardPlaceholder({ type }) {
+  const isAgency = localStorage.getItem('account_type') === 'agency';
+
+  if (isAgency) {
+    const [title, eyebrow] = agencyTitles[type] || agencyTitles.activeIncidents;
+
+    return (
+      <DashboardShell title={title} eyebrow={eyebrow}>
+        <AgencyRoutePanel type={type} />
+      </DashboardShell>
+    );
+  }
+
   const page = content[type] || content.alerts;
 
   return (

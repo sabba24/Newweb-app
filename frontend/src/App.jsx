@@ -40,6 +40,15 @@ export default function App() {
         <Route path="/dashboard/promotions" element={<DashboardPlaceholder type="promotions" />} />
         <Route path="/dashboard/agency-license" element={<DashboardPlaceholder type="agencyLicense" />} />
         <Route path="/dashboard/verified-reports" element={<DashboardPlaceholder type="verifiedReports" />} />
+        <Route path="/dashboard/active-incidents" element={<DashboardPlaceholder type="activeIncidents" />} />
+        <Route path="/dashboard/missing-persons" element={<DashboardPlaceholder type="missingPersons" />} />
+        <Route path="/dashboard/emergency-broadcasts" element={<DashboardPlaceholder type="emergencyBroadcasts" />} />
+        <Route path="/dashboard/responders" element={<DashboardPlaceholder type="responders" />} />
+        <Route path="/dashboard/dispatch-queue" element={<DashboardPlaceholder type="dispatchQueue" />} />
+        <Route path="/dashboard/surveillance-requests" element={<DashboardPlaceholder type="surveillanceRequests" />} />
+        <Route path="/dashboard/community-reports" element={<DashboardPlaceholder type="communityReports" />} />
+        <Route path="/dashboard/emergency-hotlines" element={<DashboardPlaceholder type="emergencyHotlines" />} />
+        <Route path="/dashboard/settings" element={<DashboardPlaceholder type="settings" />} />
       </Routes>
     </BrowserRouter>
   );
