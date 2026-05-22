@@ -1,10 +1,14 @@
 import { SUPPORTED_COUNTRIES } from '../lib/countryContext';
 
 export default function CountryMissingStats({ activeIndex = 0, selectedCountryCode = 'JM' }) {
-  const visibleCountries = Array.from({ length: 4 }, (_, index) => {
-    const countryIndex = (activeIndex + index) % SUPPORTED_COUNTRIES.length;
-    return SUPPORTED_COUNTRIES[countryIndex];
-  });
+  const selectedCountry = SUPPORTED_COUNTRIES.find((country) => country.code === selectedCountryCode) || SUPPORTED_COUNTRIES[0];
+  const rotatingCountries = SUPPORTED_COUNTRIES
+    .filter((country) => country.code !== selectedCountry.code)
+    .slice(activeIndex % Math.max(1, SUPPORTED_COUNTRIES.length - 1))
+    .concat(SUPPORTED_COUNTRIES.filter((country) => country.code !== selectedCountry.code))
+    .slice(0, 3);
+
+  const visibleCountries = [selectedCountry, ...rotatingCountries];
 
   return (
     <aside className="rounded-[2rem] bg-white/92 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.12)] ring-1 ring-white/80 backdrop-blur-xl">

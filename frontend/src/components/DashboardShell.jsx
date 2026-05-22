@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
 import CountrySelector from './CountrySelector';
+import LanguageSelector from './LanguageSelector';
 import useSelectedCountry from '../hooks/useSelectedCountry';
 import { getAccountGroup, getAccountLabel, getStoredAccountType, setStoredAccountType } from '../lib/accountTypes';
 
@@ -191,7 +192,8 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <CountrySelector compact />
+                <CountrySelector />
+                <LanguageSelector />
                 <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
                 <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.85)]" />
@@ -225,7 +227,8 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
             <img src={logo} alt="876Alert" className="h-[42px] w-[166px] object-contain" />
           </Link>
           <div className="flex flex-wrap items-center gap-3">
-            <CountrySelector compact />
+            <CountrySelector />
+            <LanguageSelector />
             <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
             <span className={`rounded-full px-4 py-2 text-xs font-black uppercase tracking-wide ring-1 ${
               isBusiness ? 'bg-slate-100 text-slate-800 ring-slate-200' : 'bg-emerald-50 text-emerald-700 ring-emerald-100'

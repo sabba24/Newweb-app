@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
 import CountrySelector from './CountrySelector';
+import LanguageSelector from './LanguageSelector';
 import { setAuthToken } from '../lib/api';
 
 export default function Navbar() {
@@ -35,7 +36,7 @@ export default function Navbar() {
             <img src={logo} alt="876Alert" className="h-[46px] w-[178px] object-contain" />
           </Link>
 
-          <div className="hidden flex-1 items-center justify-end gap-5 lg:flex">
+          <div className="hidden flex-1 items-center justify-end gap-4 lg:flex">
             <nav className="flex items-center justify-end gap-1">
               <NavLink to="/" className={navClass}>Home</NavLink>
               <a href="/#missing" className="rounded-full px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Missing Persons</a>
@@ -45,7 +46,10 @@ export default function Navbar() {
               <NavLink to="/contact" className={navClass}>Contact</NavLink>
             </nav>
 
-            <CountrySelector />
+            <div className="flex shrink-0 items-center gap-2">
+              <CountrySelector />
+              <LanguageSelector />
+            </div>
 
             <div className="flex shrink-0 items-center gap-2">
               {hasToken ? (
@@ -85,8 +89,9 @@ export default function Navbar() {
         {open && (
           <div className="pb-4 lg:hidden">
             <div className="rounded-3xl bg-white p-3 shadow-xl ring-1 ring-slate-100">
-              <div className="mb-3">
-                <CountrySelector compact />
+              <div className="mb-3 grid gap-2 sm:grid-cols-2">
+                <CountrySelector />
+                <LanguageSelector />
               </div>
 
               <div className="grid gap-1 text-sm font-extrabold">
