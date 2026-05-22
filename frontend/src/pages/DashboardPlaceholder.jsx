@@ -51,16 +51,31 @@ const content = {
 };
 
 const agencyTitles = {
-  activeIncidents: ['Incident command queue', 'Active incidents'],
-  verifiedReports: ['Verification command desk', 'Verified reports'],
-  missingPersons: ['Missing-person response board', 'Missing persons'],
-  emergencyBroadcasts: ['Public alert transmission center', 'Emergency broadcasts'],
-  responders: ['Responder availability grid', 'Responders'],
-  dispatchQueue: ['Dispatch operations queue', 'Dispatch queue'],
-  communityReports: ['Community intelligence intake', 'Community reports'],
-  agencyLicense: ['Agency license command', 'Agency license'],
-  billing: ['Agency billing readiness', 'Billing'],
-  settings: ['Secure agency settings', 'Settings'],
+  overview: ['Dashboard Overview', 'Operations Overview'],
+  activeIncidents: ['Active Incidents', 'Incident Command'],
+  verifiedReports: ['Verification Center', 'Verified Reports'],
+  missingPersons: ['Missing Persons Unit', 'Missing Persons'],
+  emergencyAlerts: ['Emergency Alerts', 'Alert Operations'],
+  emergencyBroadcasts: ['Emergency Broadcasts', 'Broadcast Center'],
+  responders: ['Officers & Staff', 'Personnel'],
+  dispatchQueue: ['Dispatch & Response', 'Dispatch Queue'],
+  departmentManagement: ['Department Management', 'Agency Administration'],
+  patrolZones: ['Patrol Zones', 'Zone Coverage'],
+  surveillanceRequests: ['Surveillance Requests', 'Investigations'],
+  vehiclesUnits: ['Vehicles & Units', 'Fleet Operations'],
+  evidenceMedia: ['Evidence / Media Files', 'Evidence Center'],
+  wantedPersons: ['Wanted Persons', 'Wanted Alerts'],
+  publicSafetyNotices: ['Public Safety Notices', 'Public Notices'],
+  roadTrafficAlerts: ['Road & Traffic Alerts', 'Traffic Operations'],
+  floodHurricaneWarnings: ['Flood / Hurricane Warnings', 'Weather Emergency'],
+  emergencyHotlines: ['Hotline Management', 'Emergency Hotlines'],
+  citizenComplaints: ['Citizen Complaints', 'Public Intake'],
+  caseManagement: ['Case Management', 'Case Operations'],
+  reportArchive: ['Report Archive', 'Archive'],
+  analyticsStatistics: ['Analytics & Statistics', 'Analytics'],
+  agencyLicense: ['License Management', 'Agency License'],
+  billing: ['Agency Billing', 'Billing'],
+  settings: ['Settings', 'System Settings'],
 };
 
 export default function DashboardPlaceholder({ type }) {
@@ -68,7 +83,7 @@ export default function DashboardPlaceholder({ type }) {
   const isAgency = getAccountGroup(accountType) === 'agency';
 
   if (isAgency) {
-    const [title, eyebrow] = agencyTitles[type] || agencyTitles.activeIncidents;
+    const [title, eyebrow] = agencyTitles[type] || agencyTitles.overview;
 
     return (
       <DashboardShell title={title} eyebrow={eyebrow}>

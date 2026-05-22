@@ -33,6 +33,7 @@ export default function App() {
         <Route path="/ads" element={<Advertise />} />
         <Route path="/ads/:id" element={<Advertise />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/overview" element={<DashboardPlaceholder type="overview" />} />
         <Route path="/dashboard/alerts" element={<DashboardPlaceholder type="alerts" />} />
         <Route path="/dashboard/create-alert" element={<DashboardPlaceholder type="createAlert" />} />
         <Route path="/dashboard/billing" element={<DashboardPlaceholder type="billing" />} />
@@ -42,12 +43,27 @@ export default function App() {
         <Route path="/dashboard/website-traffic" element={<DashboardPlaceholder type="websiteTraffic" />} />
         <Route path="/dashboard/agency-license" element={<DashboardPlaceholder type="agencyLicense" />} />
         <Route path="/dashboard/verified-reports" element={<DashboardPlaceholder type="verifiedReports" />} />
-        <Route path="/dashboard/active-incidents" element={<DashboardPlaceholder type="activeIncidents" />} />
         <Route path="/dashboard/missing-persons" element={<DashboardPlaceholder type="missingPersons" />} />
-        <Route path="/dashboard/emergency-broadcasts" element={<DashboardPlaceholder type="emergencyBroadcasts" />} />
-        <Route path="/dashboard/responders" element={<DashboardPlaceholder type="responders" />} />
-        <Route path="/dashboard/dispatch-queue" element={<DashboardPlaceholder type="dispatchQueue" />} />
+        <Route path="/dashboard/emergency-alerts" element={<DashboardPlaceholder type="emergencyAlerts" />} />
+        <Route path="/dashboard/active-incidents" element={<DashboardPlaceholder type="activeIncidents" />} />
         <Route path="/dashboard/community-reports" element={<DashboardPlaceholder type="communityReports" />} />
+        <Route path="/dashboard/dispatch-queue" element={<DashboardPlaceholder type="dispatchQueue" />} />
+        <Route path="/dashboard/responders" element={<DashboardPlaceholder type="responders" />} />
+        <Route path="/dashboard/department-management" element={<DashboardPlaceholder type="departmentManagement" />} />
+        <Route path="/dashboard/patrol-zones" element={<DashboardPlaceholder type="patrolZones" />} />
+        <Route path="/dashboard/emergency-broadcasts" element={<DashboardPlaceholder type="emergencyBroadcasts" />} />
+        <Route path="/dashboard/surveillance-requests" element={<DashboardPlaceholder type="surveillanceRequests" />} />
+        <Route path="/dashboard/vehicles-units" element={<DashboardPlaceholder type="vehiclesUnits" />} />
+        <Route path="/dashboard/evidence-media" element={<DashboardPlaceholder type="evidenceMedia" />} />
+        <Route path="/dashboard/wanted-persons" element={<DashboardPlaceholder type="wantedPersons" />} />
+        <Route path="/dashboard/public-safety-notices" element={<DashboardPlaceholder type="publicSafetyNotices" />} />
+        <Route path="/dashboard/road-traffic-alerts" element={<DashboardPlaceholder type="roadTrafficAlerts" />} />
+        <Route path="/dashboard/flood-hurricane-warnings" element={<DashboardPlaceholder type="floodHurricaneWarnings" />} />
+        <Route path="/dashboard/emergency-hotlines" element={<DashboardPlaceholder type="emergencyHotlines" />} />
+        <Route path="/dashboard/citizen-complaints" element={<DashboardPlaceholder type="citizenComplaints" />} />
+        <Route path="/dashboard/case-management" element={<DashboardPlaceholder type="caseManagement" />} />
+        <Route path="/dashboard/report-archive" element={<DashboardPlaceholder type="reportArchive" />} />
+        <Route path="/dashboard/analytics-statistics" element={<DashboardPlaceholder type="analyticsStatistics" />} />
         <Route path="/dashboard/settings" element={<DashboardPlaceholder type="settings" />} />
       </Routes>
     </BrowserRouter>
