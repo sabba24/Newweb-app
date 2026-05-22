@@ -87,10 +87,10 @@ function statusClass(status) {
 
 export default function AgencyOperationsCenter() {
   return (
-    <div className="grid gap-5">
-      <section className="overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-sm">
+    <div className="grid w-full gap-5 2xl:gap-6">
+      <section className="w-full overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-sm">
         <div className="h-2 bg-gradient-to-r from-blue-800 via-blue-600 to-red-500" />
-        <div className="grid gap-6 p-6 sm:p-8 xl:grid-cols-[1fr_420px] xl:items-center">
+        <div className="grid gap-6 p-6 sm:p-8 2xl:grid-cols-[minmax(0,1fr)_520px] 2xl:items-center">
           <div>
             <div className="flex flex-wrap gap-2">
               <span className="badge bg-blue-50 text-blue-800 ring-1 ring-blue-100">Agency Account</span>
@@ -98,7 +98,7 @@ export default function AgencyOperationsCenter() {
               <span className="badge bg-red-50 text-red-700 ring-1 ring-red-100">Emergency Level 3</span>
             </div>
             <h2 className="mt-5 text-4xl font-black tracking-[-0.045em] text-slate-950 sm:text-5xl">Agency Operations Center</h2>
-            <p className="mt-3 max-w-3xl text-sm font-semibold leading-7 text-slate-600">
+            <p className="mt-3 max-w-5xl text-sm font-semibold leading-7 text-slate-600">
               Official public safety command system for emergency response, department management, missing persons, verified reports, patrol coverage, and parish-wide alerts.
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function AgencyOperationsCenter() {
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid w-full gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-8">
         {metrics.map((metric) => (
           <article key={metric.label} className="group rounded-3xl border border-slate-100 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
             <div className="flex items-start justify-between gap-3">
@@ -137,7 +137,7 @@ export default function AgencyOperationsCenter() {
         ))}
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-[1fr_0.9fr]">
+      <section className="grid w-full gap-5 2xl:grid-cols-[minmax(0,1.1fr)_minmax(520px,0.9fr)]">
         <div className="rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
@@ -208,11 +208,11 @@ export default function AgencyOperationsCenter() {
         </div>
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
+      <section className="grid w-full gap-5 2xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">Department Management</p>
           <h3 className="mt-2 text-2xl font-black text-slate-950">Jamaica Public Safety Division</h3>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-2">
             {[
               ['Assigned parishes', 'Kingston, St. Andrew, St. Catherine'],
               ['Officer count', '146 active personnel'],
@@ -256,7 +256,7 @@ export default function AgencyOperationsCenter() {
         </div>
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-3">
+      <section className="grid w-full gap-5 xl:grid-cols-3">
         <div className="rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">Dispatch & Response</p>
           <h3 className="mt-2 text-2xl font-black text-slate-950">Active emergency queue</h3>
@@ -304,7 +304,7 @@ export default function AgencyOperationsCenter() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm">
+      <section className="w-full rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">Community Reports</p>
@@ -317,7 +317,7 @@ export default function AgencyOperationsCenter() {
           </div>
         </div>
 
-        <div className="mt-5 grid gap-3">
+        <div className="mt-5 grid gap-3 2xl:grid-cols-2">
           {reports.map((report) => (
             <article key={`${report.reporter}-${report.parish}`} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
               <div className="grid gap-4 lg:grid-cols-[1fr_130px]">

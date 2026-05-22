@@ -90,7 +90,7 @@ function AgencySidebar({ menu, navClass, open, onClose }) {
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 w-[310px] overflow-y-auto border-r border-blue-100 bg-white shadow-2xl transition-transform duration-200 lg:sticky lg:top-5 lg:z-auto lg:h-[calc(100vh-2.5rem)] lg:translate-x-0 lg:rounded-[1.75rem] lg:border lg:shadow-[0_18px_60px_rgba(15,23,42,0.08)] ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[310px] overflow-y-auto border-r border-blue-100 bg-white shadow-2xl transition-transform duration-200 lg:w-[320px] lg:translate-x-0 lg:shadow-[10px_0_40px_rgba(15,23,42,0.08)] ${
         open ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="sticky top-0 z-10 border-b border-blue-100 bg-white/95 p-4 backdrop-blur">
@@ -153,7 +153,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
       ? `flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-black transition ${
           isActive
             ? 'bg-blue-700 text-white shadow-lg shadow-blue-700/20 [&_span:first-child]:bg-white/15'
-            : 'text-slate-650 hover:bg-blue-50 hover:text-blue-800'
+            : 'text-slate-600 hover:bg-blue-50 hover:text-blue-800'
         }`
       : `rounded-2xl px-4 py-3 text-sm font-black transition ${
           isActive ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-700'
@@ -161,44 +161,44 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
 
   if (isAgency) {
     return (
-      <div className="min-h-screen bg-[linear-gradient(135deg,#f8fafc_0%,#eff6ff_52%,#f8fafc_100%)]">
-        <div className="container-premium py-5">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-blue-100 bg-white/92 p-4 shadow-sm backdrop-blur">
-            <div className="flex items-center gap-3">
-              <button
-                className="grid h-11 w-11 place-items-center rounded-full bg-blue-700 text-white shadow-lg shadow-blue-700/20 lg:hidden"
-                onClick={() => setAgencyMenuOpen(true)}
-                aria-label="Open agency menu"
-              >
-                ☰
-              </button>
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">876Alert Secure Agency Console</p>
-                <h1 className="text-xl font-black text-slate-950 sm:text-2xl">{displayTitle}</h1>
+      <div className="min-h-screen w-full bg-[linear-gradient(135deg,#f8fafc_0%,#eff6ff_52%,#f8fafc_100%)]">
+        <AgencySidebar menu={menu} navClass={navClass} open={agencyMenuOpen} onClose={() => setAgencyMenuOpen(false)} />
+
+        <div className="min-w-0 lg:pl-[320px]">
+          <div className="w-full px-3 py-4 sm:px-4 lg:px-5 xl:px-6 2xl:px-8">
+            <div className="mb-5 flex w-full flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-blue-100 bg-white/94 p-4 shadow-sm backdrop-blur">
+              <div className="flex items-center gap-3">
+                <button
+                  className="grid h-11 w-11 place-items-center rounded-full bg-blue-700 text-white shadow-lg shadow-blue-700/20 lg:hidden"
+                  onClick={() => setAgencyMenuOpen(true)}
+                  aria-label="Open agency menu"
+                >
+                  ☰
+                </button>
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">876Alert Secure Agency Console</p>
+                  <h1 className="text-xl font-black text-slate-950 sm:text-2xl">{displayTitle}</h1>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
+                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.85)]" />
+                  Live system
+                </span>
+                <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-100">
+                  {accountLabel}
+                </span>
+                <button className="grid h-11 w-11 place-items-center rounded-full bg-white text-lg shadow-sm ring-1 ring-slate-200" aria-label="Notifications">
+                  🔔
+                </button>
+                <Link to="/" className="btn btn-outline !min-h-10 !px-4 !py-2 text-xs">Back to site</Link>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.85)]" />
-                Live system
-              </span>
-              <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-100">
-                {accountLabel}
-              </span>
-              <button className="grid h-11 w-11 place-items-center rounded-full bg-white text-lg shadow-sm ring-1 ring-slate-200" aria-label="Notifications">
-                🔔
-              </button>
-              <Link to="/" className="btn btn-outline !min-h-10 !px-4 !py-2 text-xs">Back to site</Link>
-            </div>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-[310px_1fr]">
-            <AgencySidebar menu={menu} navClass={navClass} open={agencyMenuOpen} onClose={() => setAgencyMenuOpen(false)} />
-
             <main className="min-w-0">
-              <div className="mb-5 rounded-[2rem] border border-blue-100 bg-white p-6 shadow-sm sm:p-8">
+              <div className="mb-5 w-full rounded-[2rem] border border-blue-100 bg-white p-6 shadow-sm sm:p-8">
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">{eyebrow}</p>
                 <h2 className="mt-2 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{displayTitle}</h2>
               </div>
