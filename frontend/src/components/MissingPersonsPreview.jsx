@@ -62,21 +62,21 @@ export default function MissingPersonsPreview() {
   }, [items, query, parish]);
 
   return (
-    <section id="missing" className="bg-white py-16 sm:py-24">
+    <section id="missing" className="bg-slate-50/70 section-padding">
       <div className="container-premium">
-        <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div>
-            <span className="badge bg-emerald-50 text-emerald-700">Missing persons registry</span>
-            <h2 className="mt-4 max-w-3xl text-4xl font-black tracking-tight text-gray-950 sm:text-5xl">
-              Recently reported across Jamaica
+        <div className="mb-8 grid gap-5 lg:grid-cols-[1fr_0.78fr] lg:items-end">
+          <div className="section-heading">
+            <span className="section-eyebrow">Missing persons registry</span>
+            <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+              Recent public reports across Jamaica
             </h2>
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-gray-600">
-              Browse active public reports, filter by parish, and share verified information with the listed contacts or local authorities.
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+              Search active reports, filter by parish, and contact the listed number or authorities with verified information.
             </p>
           </div>
 
-          <div className="glass-panel rounded-3xl p-3">
-            <div className="grid gap-3 sm:grid-cols-[1fr_13rem]">
+          <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+            <div className="grid gap-3 sm:grid-cols-[1fr_12rem]">
               <input
                 className="input-premium"
                 placeholder="Search name, location, parish..."
@@ -94,16 +94,16 @@ export default function MissingPersonsPreview() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 8 }).map((_, index) => (
               <SkeletonCard key={index} />
             ))}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredItems.slice(0, visible).map((person) => (
-                <article key={person.id} className="card-premium group overflow-hidden rounded-[1.65rem]">
+                <article key={person.id} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
                   <div className="relative aspect-[4/3] overflow-hidden bg-emerald-50">
                     <img src={person.photo_url} alt={person.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
                     <div className="absolute left-3 top-3">
@@ -112,33 +112,35 @@ export default function MissingPersonsPreview() {
                       </span>
                     </div>
                   </div>
-                  <div className="p-5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-lg font-black text-gray-950">{person.name}</h3>
-                        <p className="text-sm font-semibold text-emerald-700">{person.age} years old · {person.parish}</p>
-                      </div>
+
+                  <div className="flex flex-1 flex-col p-4">
+                    <div>
+                      <h3 className="text-base font-black leading-tight text-slate-950">{person.name}</h3>
+                      <p className="mt-1 text-xs font-extrabold text-emerald-700">{person.age} years old · {person.parish}</p>
                     </div>
-                    <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{person.description}</p>
-                    <div className="mt-4 space-y-2 text-sm text-gray-600">
-                      <p><span className="font-bold text-gray-900">Last seen:</span> {person.last_seen_location}</p>
-                      <p><span className="font-bold text-gray-900">Date:</span> {new Date(person.date_missing).toLocaleDateString()}</p>
+
+                    <p className="mt-3 line-clamp-2-custom min-h-[2.5rem] text-sm leading-5 text-slate-600">{person.description}</p>
+
+                    <div className="mt-4 space-y-1.5 text-xs leading-5 text-slate-600">
+                      <p className="line-clamp-2-custom"><span className="font-black text-slate-900">Last seen:</span> {person.last_seen_location}</p>
+                      <p><span className="font-black text-slate-900">Date:</span> {new Date(person.date_missing).toLocaleDateString()}</p>
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-2">
-                      <a href={`tel:${person.contact_number}`} className="btn btn-primary !px-3 !py-3 text-sm">Call</a>
-                      <button className="btn btn-outline !px-3 !py-3 text-sm">Share</button>
+
+                    <div className="mt-auto grid grid-cols-2 gap-2 pt-4">
+                      <a href={`tel:${person.contact_number}`} className="btn btn-primary !min-h-10 !px-3 !py-2 text-xs">Call</a>
+                      <button className="btn btn-outline !min-h-10 !px-3 !py-2 text-xs">Share</button>
                     </div>
                   </div>
                 </article>
               ))}
             </div>
 
-            <div className="mt-10 flex flex-col items-center gap-3">
-              <p className="text-sm font-semibold text-gray-500">
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <p className="text-sm font-bold text-slate-500">
                 Showing {Math.min(visible, filteredItems.length)} of {filteredItems.length} reports
               </p>
               {visible < filteredItems.length && (
-                <button onClick={() => setVisible((count) => count + 12)} className="btn btn-outline">
+                <button onClick={() => setVisible((count) => count + 12)} className="btn btn-outline sm:w-auto">
                   Load more profiles
                 </button>
               )}

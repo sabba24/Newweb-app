@@ -2,39 +2,36 @@ import logoMark from '../assets/logo-mark.svg';
 import { demoMissingPersons } from '../lib/demoData';
 
 export default function Hero() {
-  const featured = demoMissingPersons.slice(0, 6);
+  const featured = demoMissingPersons.slice(0, 5);
 
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,#ffffff_0%,#f0fdf4_48%,#fff8d7_100%)]" />
-        <div className="absolute left-[-10rem] top-[-12rem] h-[30rem] w-[30rem] rounded-full bg-emerald-300/25 blur-3xl" />
-        <div className="absolute right-[-8rem] top-16 h-[28rem] w-[28rem] rounded-full bg-yellow-300/25 blur-3xl" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent" />
-      </div>
+    <section className="relative isolate overflow-hidden border-b border-slate-100">
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,#ffffff_0%,#f0fdf4_52%,#fff8d7_100%)]" />
+      <div className="absolute left-[-12rem] top-[-14rem] -z-10 h-[32rem] w-[32rem] rounded-full bg-emerald-300/24 blur-3xl" />
+      <div className="absolute right-[-10rem] top-8 -z-10 h-[30rem] w-[30rem] rounded-full bg-yellow-300/25 blur-3xl" />
 
-      <div className="container-premium grid gap-12 py-14 lg:grid-cols-[1.02fr_0.98fr] lg:py-24">
-        <div className="flex flex-col justify-center animate-fade-up">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-extrabold text-emerald-800 shadow-sm backdrop-blur">
+      <div className="container-premium grid items-center gap-10 py-14 lg:grid-cols-[1.04fr_0.96fr] lg:py-20">
+        <div className="max-w-3xl animate-fade-up">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/86 px-3.5 py-2 text-xs font-black text-emerald-800 shadow-sm backdrop-blur sm:text-sm">
             <img src={logoMark} alt="" className="h-6 w-6" />
             Jamaica Missing Persons & Emergency Alert Network
           </div>
 
-          <h1 className="mt-7 max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.06em] text-gray-950 sm:text-6xl lg:text-7xl">
-            Faster alerts. Safer communities. More people brought home.
+          <h1 className="mt-6 text-4xl font-black leading-[1.02] tracking-[-0.055em] text-slate-950 sm:text-5xl lg:text-6xl">
+            Public safety alerts that help Jamaica respond faster.
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-700 sm:text-xl">
-            876Alert helps Jamaicans share verified missing-person reports, emergency alerts, parish safety updates, and critical response information in one trusted public safety platform.
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+            876Alert brings missing-person reports, parish emergency updates, traffic notices, and safety resources into one polished, mobile-ready platform.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#missing" className="btn btn-primary">Browse Missing Persons</a>
-            <a href="#alerts" className="btn btn-outline">View Emergency Alerts</a>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a href="#missing" className="btn btn-primary sm:w-auto">Browse reports</a>
+            <a href="#alerts" className="btn btn-outline sm:w-auto">View live alerts</a>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            {['Verified reports', '14 parishes covered', 'Mobile-first alerts'].map((item) => (
+          <div className="mt-7 flex flex-wrap gap-2.5">
+            {['Verified-first workflow', '14 parishes covered', 'Emergency-ready design'].map((item) => (
               <span key={item} className="badge border border-emerald-100 bg-white text-emerald-800 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 {item}
@@ -42,52 +39,55 @@ export default function Hero() {
             ))}
           </div>
 
-          <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+          <dl className="mt-8 grid max-w-xl grid-cols-3 gap-3">
             {[
               ['1,200+', 'Reports'],
               ['300+', 'Recoveries'],
-              ['24/7', 'Alert access'],
+              ['24/7', 'Updates'],
             ].map(([value, label]) => (
-              <div key={label} className="rounded-3xl border border-white/80 bg-white/75 p-4 text-center shadow-sm backdrop-blur transition hover:-translate-y-1">
-                <dt className="text-2xl font-black tracking-tight text-gray-950 sm:text-3xl">{value}</dt>
-                <dd className="mt-1 text-xs font-bold uppercase tracking-wider text-gray-500">{label}</dd>
+              <div key={label} className="rounded-2xl border border-white/80 bg-white/78 p-4 shadow-sm backdrop-blur">
+                <dt className="text-2xl font-black tracking-tight text-slate-950">{value}</dt>
+                <dd className="mt-1 text-xs font-black uppercase tracking-wider text-slate-500">{label}</dd>
               </div>
             ))}
           </dl>
         </div>
 
-        <div className="relative min-h-[34rem] animate-fade-up lg:min-h-[42rem]">
-          <div className="absolute right-0 top-0 w-full max-w-xl rounded-[2rem] border border-white/70 bg-white/70 p-3 shadow-2xl backdrop-blur-xl">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {featured.map((person, index) => (
-                <div key={person.id} className={`group overflow-hidden rounded-[1.45rem] border border-white bg-white shadow-sm ${index === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`}>
-                  <div className="relative aspect-[4/5] overflow-hidden">
-                    <img src={person.photo_url} alt={person.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
-                      <p className="text-sm font-black">{person.name}</p>
-                      <p className="text-xs text-white/80">{person.parish}</p>
-                    </div>
+        <div className="relative mx-auto w-full max-w-[34rem] animate-fade-up lg:mx-0">
+          <div className="rounded-[2rem] border border-white/80 bg-white/76 p-3 shadow-2xl backdrop-blur-xl">
+            <div className="grid grid-cols-5 gap-2">
+              <div className="col-span-3 overflow-hidden rounded-[1.45rem]">
+                <div className="relative aspect-[4/4.35]">
+                  <img src={featured[0].photo_url} alt={featured[0].name} className="h-full w-full object-cover" loading="lazy" />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/78 to-transparent p-4 text-white">
+                    <p className="text-base font-black">{featured[0].name}</p>
+                    <p className="text-xs font-semibold text-white/80">{featured[0].parish} · Active report</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="absolute bottom-4 left-0 max-w-sm rounded-[2rem] border border-white/70 bg-white/88 p-5 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-red-600">
-                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                </svg>
               </div>
+
+              <div className="col-span-2 grid gap-2">
+                {featured.slice(1).map((person) => (
+                  <div key={person.id} className="overflow-hidden rounded-2xl">
+                    <div className="relative aspect-[4/3]">
+                      <img src={person.photo_url} alt={person.name} className="h-full w-full object-cover" loading="lazy" />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/70 to-transparent p-2 text-white">
+                        <p className="truncate text-xs font-black">{person.name}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-3 grid gap-3 rounded-[1.5rem] bg-slate-950 p-4 text-white sm:grid-cols-[1fr_auto] sm:items-center">
               <div>
-                <p className="text-sm font-black text-gray-950">Live parish alert routing</p>
-                <p className="mt-1 text-sm leading-6 text-gray-600">Emergency notices are grouped by severity, parish, and latest timestamp for faster response.</p>
+                <p className="text-sm font-black">Live parish alert routing</p>
+                <p className="mt-1 text-xs leading-5 text-slate-300">Critical notices grouped by severity, parish, and recency.</p>
               </div>
+              <a href="tel:119" className="rounded-full bg-yellow-300 px-4 py-2 text-center text-sm font-black text-slate-950">Call 119</a>
             </div>
           </div>
-
-          <div className="absolute right-10 top-16 -z-10 h-52 w-52 rounded-full bg-yellow-300/50 blur-3xl animate-float" />
         </div>
       </div>
     </section>

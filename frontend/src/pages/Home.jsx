@@ -5,19 +5,23 @@ import EmergencyAlertsSection from '../components/EmergencyAlertsSection';
 import Stats from '../components/Stats';
 import HowItWorks from '../components/HowItWorks';
 import TrustSafety from '../components/TrustSafety';
+import Testimonials from '../components/Testimonials';
+import FinalCta from '../components/FinalCta';
 import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="flex-1">
+      <main>
         <Hero />
         <Stats />
         <MissingPersonsPreview />
         <EmergencyAlertsSection />
         <HowItWorks />
         <TrustSafety />
+        <Testimonials />
+        <FinalCta />
       </main>
       <Footer />
     </div>
