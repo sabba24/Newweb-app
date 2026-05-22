@@ -6,17 +6,18 @@ export default function Footer() {
   const [joined, setJoined] = useState(false);
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="container-premium py-12 lg:py-14">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.72fr_0.72fr_0.9fr]">
+    <footer className="bg-emerald-950 text-white">
+      <div className="container-premium py-14">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <section>
-            <img src={logo} className="h-11 w-auto max-w-[184px]" alt="876Alert" />
-            <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">
-              Jamaica’s community-first missing persons and emergency alert platform for clearer reporting, faster sharing, and safer response.
+            <img src={logo} className="h-11 w-auto max-w-[184px] brightness-[1.15]" alt="876Alert" />
+            <p className="mt-5 max-w-sm text-sm leading-7 text-emerald-50/80">
+              Jamaica’s community-first missing persons and emergency alert platform for faster reporting, clearer updates, and safer public response.
             </p>
-            <div className="mt-5 flex gap-2">
+
+            <div className="mt-6 flex gap-2">
               {['f', 'x', 'ig'].map((item) => (
-                <a key={item} href="#" className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-xs font-black uppercase text-slate-600 transition hover:-translate-y-1 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700" aria-label={item}>
+                <a key={item} href="#" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-xs font-black uppercase text-white transition hover:-translate-y-1 hover:bg-white/20" aria-label={item}>
                   {item}
                 </a>
               ))}
@@ -24,51 +25,52 @@ export default function Footer() {
           </section>
 
           <section>
-            <h3 className="text-sm font-black uppercase tracking-[0.16em] text-slate-950">Platform</h3>
-            <nav className="mt-4 grid gap-3 text-sm font-bold text-slate-600">
-              <a href="/#missing" className="hover:text-emerald-700">Missing Persons</a>
-              <a href="/#alerts" className="hover:text-emerald-700">Emergency Alerts</a>
-              <Link to="/safety-tips" className="hover:text-emerald-700">Safety Tips</Link>
-              <Link to="/emergency-resources" className="hover:text-emerald-700">Emergency Resources</Link>
-              <Link to="/setup" className="hover:text-emerald-700">Setup</Link>
+            <h3 className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">Platform</h3>
+            <nav className="mt-4 grid gap-3 text-sm font-semibold text-emerald-50/80">
+              <Link to="/" className="hover:text-white">Home</Link>
+              <a href="/#missing" className="hover:text-white">Missing Persons</a>
+              <a href="/#alerts" className="hover:text-white">Alerts</a>
+              <Link to="/safety-tips" className="hover:text-white">Safety Tips</Link>
+              <Link to="/emergency-resources" className="hover:text-white">Emergency Resources</Link>
             </nav>
           </section>
 
           <section>
-            <h3 className="text-sm font-black uppercase tracking-[0.16em] text-slate-950">Organization</h3>
-            <nav className="mt-4 grid gap-3 text-sm font-bold text-slate-600">
-              <Link to="/about" className="hover:text-emerald-700">About Us</Link>
-              <Link to="/contact" className="hover:text-emerald-700">Contact</Link>
-              <Link to="/privacy" className="hover:text-emerald-700">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-emerald-700">Terms & Conditions</Link>
+            <h3 className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">Company</h3>
+            <nav className="mt-4 grid gap-3 text-sm font-semibold text-emerald-50/80">
+              <Link to="/about" className="hover:text-white">About</Link>
+              <Link to="/contact" className="hover:text-white">Contact</Link>
+              <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-white">Terms & Conditions</Link>
+              <Link to="/setup" className="hover:text-white">Setup</Link>
             </nav>
           </section>
 
-          <section className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-            <h3 className="text-sm font-black uppercase tracking-[0.16em] text-slate-950">Emergency contacts</h3>
+          <section className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/10 backdrop-blur">
+            <h3 className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">Emergency contacts</h3>
             <div className="mt-4 grid grid-cols-2 gap-3">
-              <a href="tel:119" className="rounded-2xl bg-emerald-700 p-4 text-center text-white shadow-sm">
+              <a href="tel:119" className="rounded-2xl bg-white p-4 text-center text-slate-950">
                 <span className="block text-2xl font-black">119</span>
-                <span className="text-xs font-bold text-emerald-50">Police</span>
+                <span className="text-xs font-bold text-slate-500">Police</span>
               </a>
-              <a href="tel:110" className="rounded-2xl bg-yellow-300 p-4 text-center text-slate-950 shadow-sm">
+              <a href="tel:110" className="rounded-2xl bg-yellow-300 p-4 text-center text-slate-950">
                 <span className="block text-2xl font-black">110</span>
-                <span className="text-xs font-bold">Fire / EMS</span>
+                <span className="text-xs font-bold text-slate-600">Fire / EMS</span>
               </a>
             </div>
 
             <form onSubmit={(event) => { event.preventDefault(); setJoined(true); }} className="mt-5">
-              <label className="text-sm font-black text-slate-800">Get safety updates</label>
+              <label className="text-sm font-black text-white">Get safety updates</label>
               <div className="mt-2 grid gap-2 sm:grid-cols-[1fr_auto] lg:grid-cols-1">
-                <input className="input-premium !rounded-full !py-3" type="email" required placeholder="Email address" />
+                <input className="input-premium !rounded-full !border-white/20 !bg-white !py-3 !text-slate-950" type="email" required placeholder="Email address" />
                 <button className="btn btn-primary !min-h-11 !px-5">Join</button>
               </div>
-              {joined && <p className="mt-2 text-sm font-bold text-emerald-700">Thanks — you’re on the update list.</p>}
+              {joined && <p className="mt-2 text-sm font-bold text-yellow-200">Thanks — you’re on the update list.</p>}
             </form>
           </section>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm font-semibold text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm font-semibold text-emerald-50/70 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} 876Alert. All rights reserved.</p>
           <p>Built for community safety across Jamaica.</p>
         </div>
