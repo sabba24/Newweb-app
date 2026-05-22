@@ -60,18 +60,10 @@ textarea {
   font: inherit;
 }
 
-.container-nav {
-  width: min(100% - 40px, 1480px);
-  margin-inline: auto;
-}
-
-.container-hero {
-  width: min(100% - 40px, 1380px);
-  margin-inline: auto;
-}
-
+.container-nav,
+.container-hero,
 .container-premium {
-  width: min(100% - 32px, 1180px);
+  width: min(100% - 40px, 1600px);
   margin-inline: auto;
 }
 
@@ -234,7 +226,7 @@ textarea {
   .container-nav,
   .container-hero,
   .container-premium {
-    width: min(100% - 20px, 1180px);
+    width: min(100% - 20px, 1600px);
   }
 
   .section-padding {

@@ -9,14 +9,14 @@ export default function Hero() {
       <div className="absolute left-[-12rem] top-[-12rem] -z-10 h-[32rem] w-[32rem] rounded-full bg-emerald-300/20 blur-3xl" />
       <div className="absolute right-[-10rem] top-20 -z-10 h-[28rem] w-[28rem] rounded-full bg-yellow-300/25 blur-3xl" />
 
-      <div className="container-hero grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1fr_0.92fr] lg:gap-14 lg:py-20 xl:gap-20">
-        <div className="max-w-[720px] justify-self-start">
+      <div className="container-hero grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(440px,620px)] lg:gap-16 lg:py-20 xl:gap-24">
+        <div className="max-w-[760px] justify-self-start">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 shadow-sm ring-1 ring-emerald-100 backdrop-blur">
             <img src={logoMark} alt="" className="h-6 w-6" />
             Jamaica public safety platform
           </div>
 
-          <h1 className="mt-6 text-4xl font-black leading-[1.02] tracking-[-0.055em] text-slate-950 sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-black leading-[1.02] tracking-[-0.055em] text-slate-950 sm:text-5xl lg:text-6xl xl:text-7xl">
             Faster missing-person and emergency alerts across Jamaica.
           </h1>
 
@@ -38,7 +38,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <dl className="mt-9 grid max-w-xl grid-cols-3 gap-3">
+          <dl className="mt-9 grid max-w-2xl grid-cols-3 gap-3">
             {[
               ['1,200+', 'Reports'],
               ['300+', 'Recoveries'],
@@ -52,7 +52,7 @@ export default function Hero() {
           </dl>
         </div>
 
-        <div className="w-full max-w-[560px] justify-self-center lg:justify-self-end">
+        <div className="w-full max-w-[620px] justify-self-center lg:justify-self-end">
           <div className="rounded-[2rem] bg-white/86 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.12)] ring-1 ring-white/80 backdrop-blur-xl">
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2 overflow-hidden rounded-[1.5rem]">

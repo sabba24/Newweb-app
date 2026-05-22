@@ -63,8 +63,8 @@ export default function MissingPersonsPreview() {
   return (
     <section id="missing" className="bg-white section-padding">
       <div className="container-premium">
-        <div className="mb-9 grid gap-6 lg:grid-cols-[1fr_0.82fr] lg:items-end">
-          <div className="max-w-3xl">
+        <div className="mb-9 grid gap-6 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+          <div className="max-w-4xl">
             <span className="section-eyebrow">Missing persons</span>
             <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-slate-950 sm:text-4xl lg:text-5xl">
               Search recent public reports
@@ -93,14 +93,14 @@ export default function MissingPersonsPreview() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {Array.from({ length: 8 }).map((_, index) => (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {Array.from({ length: 12 }).map((_, index) => (
               <SkeletonCard key={index} />
             ))}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
               {filteredItems.slice(0, visible).map((person) => (
                 <article key={person.id} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_12px_34px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_20px_46px_rgba(15,23,42,0.12)]">
                   <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
