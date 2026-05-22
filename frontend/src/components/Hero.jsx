@@ -78,7 +78,7 @@ export default function Hero() {
           </dl>
         </div>
 
-        <div className="w-full max-w-[700px] justify-self-center lg:justify-self-end">
+        <div className="w-full max-w-[700px] justify-self-center lg:translate-x-4 lg:justify-self-end xl:translate-x-8 2xl:translate-x-10">
           <div className="overflow-hidden rounded-[2rem] bg-white/90 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.14)] ring-1 ring-white/80 backdrop-blur-xl">
             <div className="rounded-[1.6rem] bg-gradient-to-br from-red-700 via-red-600 to-rose-700 p-3 text-white shadow-[0_20px_50px_rgba(185,28,28,0.28)]">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2 px-1">
@@ -135,6 +135,9 @@ export default function Hero() {
                     <p className="mt-1 text-xs font-semibold leading-5 text-red-700">
                       This alert is promoted at the top for faster community visibility.
                     </p>
+                    <a href="/#missing" className="btn btn-primary mt-3 !min-h-10 !w-full !bg-gradient-to-br !from-red-700 !to-red-600 !px-4 !py-2 text-xs shadow-[0_10px_22px_rgba(185,28,28,0.24)]">
+                      View Details
+                    </a>
                   </div>
                 </div>
               </div>
@@ -154,7 +157,12 @@ export default function Hero() {
                       </div>
                       <h3 className="mt-1 truncate text-sm font-black text-slate-950">{person.name}</h3>
                       <p className="truncate text-xs font-bold text-emerald-700">{person.parish}</p>
-                      <p className="mt-1 text-[0.68rem] font-black capitalize text-slate-500">{person.status} alert</p>
+                      <div className="mt-1 flex items-center justify-between gap-2">
+                        <p className="truncate text-[0.68rem] font-black capitalize text-slate-500">{person.status} alert</p>
+                        <a href="/#missing" className="rounded-full border border-slate-300 bg-white px-2 py-1 text-[0.64rem] font-black text-slate-800 shadow-sm transition hover:border-emerald-400 hover:text-emerald-700">
+                          Details
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </article>
