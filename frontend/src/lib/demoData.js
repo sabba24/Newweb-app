@@ -38,44 +38,31 @@ const slugify = (value) =>
 
 const daysAgo = (days) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-const femalePortraits = [
+const portraits = [
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=90',
-];
-
-const malePortraits = [
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=90',
+  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90',
   'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=90',
+  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=90',
   'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=900&q=90',
-  'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=90',
 ];
 
 const namesByCountry = {
-  JM: [['Aaliyah Brown', 14, 'female'], ['Dwayne Campbell', 28, 'male'], ['Shanice Johnson', 22, 'female']],
-  US: [['Maya Johnson', 16, 'female'], ['Ethan Miller', 31, 'male'], ['Sofia Ramirez', 24, 'female']],
-  CA: [['Olivia Chen', 19, 'female'], ['Noah Thompson', 35, 'male'], ['Amara Singh', 27, 'female']],
-  GB: [['Emily Clarke', 21, 'female'], ['Oliver Hughes', 42, 'male'], ['Aisha Khan', 18, 'female']],
-  PA: [['Valeria Torres', 17, 'female'], ['Mateo Castillo', 29, 'male'], ['Camila Ríos', 23, 'female']],
-  TT: [['Anika Mohammed', 20, 'female'], ['Jamal Baptiste', 33, 'male'], ['Leah Singh', 15, 'female']],
-  BB: [['Renee Alleyne', 26, 'female'], ['Malik Clarke', 37, 'male'], ['Tia Small', 16, 'female']],
-  BS: [['Brianna Rolle', 18, 'female'], ['Devon Sands', 41, 'male'], ['Kayla Forbes', 25, 'female']],
-  GY: [['Priya Persaud', 23, 'female'], ['Andre Singh', 34, 'male'], ['Natasha Williams', 29, 'female']],
-  IN: [['Ananya Sharma', 18, 'female'], ['Arjun Patel', 32, 'male'], ['Meera Nair', 24, 'female']],
-  NG: [['Ada Okafor', 20, 'female'], ['Tunde Balogun', 39, 'male'], ['Zainab Musa', 17, 'female']],
-  GH: [['Ama Mensah', 22, 'female'], ['Kwame Boateng', 36, 'male'], ['Efua Owusu', 19, 'female']],
-  PH: [['Maria Santos', 16, 'female'], ['Jose Reyes', 30, 'male'], ['Angel Cruz', 21, 'female']],
-  BR: [['Ana Silva', 19, 'female'], ['Lucas Oliveira', 38, 'male'], ['Mariana Costa', 25, 'female']],
-  MX: [['Isabella Hernández', 17, 'female'], ['Diego Morales', 33, 'male'], ['Lucía García', 26, 'female']],
+  JM: [['Aaliyah Brown', 14], ['Dwayne Campbell', 28], ['Shanice Johnson', 22]],
+  US: [['Maya Johnson', 16], ['Ethan Miller', 31], ['Sofia Ramirez', 24]],
+  CA: [['Olivia Chen', 19], ['Noah Thompson', 35], ['Amara Singh', 27]],
+  GB: [['Emily Clarke', 21], ['Oliver Hughes', 42], ['Aisha Khan', 18]],
+  PA: [['Valeria Torres', 17], ['Mateo Castillo', 29], ['Camila Ríos', 23]],
+  TT: [['Anika Mohammed', 20], ['Jamal Baptiste', 33], ['Leah Singh', 15]],
+  BB: [['Renee Alleyne', 26], ['Malik Clarke', 37], ['Tia Small', 16]],
+  BS: [['Brianna Rolle', 18], ['Devon Sands', 41], ['Kayla Forbes', 25]],
+  GY: [['Priya Persaud', 23], ['Andre Singh', 34], ['Natasha Williams', 29]],
+  IN: [['Ananya Sharma', 18], ['Arjun Patel', 32], ['Meera Nair', 24]],
+  NG: [['Ada Okafor', 20], ['Tunde Balogun', 39], ['Zainab Musa', 17]],
+  GH: [['Ama Mensah', 22], ['Kwame Boateng', 36], ['Efua Owusu', 19]],
+  PH: [['Maria Santos', 16], ['Jose Reyes', 30], ['Angel Cruz', 21]],
+  BR: [['Ana Silva', 19], ['Lucas Oliveira', 38], ['Mariana Costa', 25]],
+  MX: [['Isabella Hernández', 17], ['Diego Morales', 33], ['Lucía García', 26]],
 };
 
 const descriptions = [
@@ -87,17 +74,12 @@ const descriptions = [
   'Anyone with information is urged to contact the listed number or the nearest police station.',
 ];
 
-function photoFor(gender, index) {
-  const portraits = gender === 'female' ? femalePortraits : malePortraits;
-  return portraits[index % portraits.length];
-}
-
 let personId = 1000;
 
 export const demoMissingPersons = SUPPORTED_COUNTRIES.flatMap((country, countryIndex) => {
   const names = namesByCountry[country.code] || namesByCountry.JM;
 
-  return names.map(([name, age, gender], index) => {
+  return names.map(([name, age], index) => {
     const region = country.regions[index % country.regions.length];
     const city = country.cities[index % country.cities.length];
     const id = personId++;
@@ -117,10 +99,10 @@ export const demoMissingPersons = SUPPORTED_COUNTRIES.flatMap((country, countryI
       location: city,
       last_seen_location: `${city} ${region}`,
       date_missing: daysAgo((countryIndex + index) % 21 + 1),
-      photo_url: photoFor(gender, countryIndex + index),
+      photo_url: portraits[(countryIndex + index) % portraits.length],
       status,
       priority: index === 0,
-      contact_number: `+${100 + countryIndex}-${String(200 + index * 37).padStart(3, '0')}-${String(1000 + countryIndex * 41 + index * 29).slice(0, 4)}`,
+      contact_number: `${country.phoneCode}-000-${String(1000 + countryIndex * 41 + index * 29).slice(0, 4)}`,
       description: descriptions[(countryIndex + index) % descriptions.length],
       report_tip_url: `mailto:tips@876alert.example?subject=Tip for ${encodeURIComponent(name)}`,
     };
@@ -132,7 +114,6 @@ const adImages = [
   'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=90',
   'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=90',
   'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=90',
-  'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=90',
 ];
 
 export const sponsoredAds = SUPPORTED_COUNTRIES.map((country, index) => ({
@@ -169,7 +150,6 @@ const alertImages = [
   'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80',
   'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80',
   'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80',
-  'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80',
 ];
 
 export const demoAlerts = SUPPORTED_COUNTRIES.flatMap((country, countryIndex) => [

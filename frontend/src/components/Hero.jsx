@@ -135,12 +135,7 @@ export default function Hero() {
                       <div className="grid min-h-0 flex-1 gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
                         <div className="min-h-0 overflow-hidden rounded-[1.35rem] bg-red-950/25 ring-1 ring-white/15">
                           <div className="relative h-full min-h-[250px]">
-                            <img
-                              src={priorityPerson.photo_url}
-                              alt={priorityPerson.name}
-                              className="h-full w-full object-cover"
-                              loading="eager"
-                            />
+                            <img src={priorityPerson.photo_url} alt={priorityPerson.name} className="h-full w-full object-cover" loading="eager" />
                             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-red-950/95 to-transparent p-4">
                               <p className="text-2xl font-black leading-tight">{priorityPerson.name}</p>
                               <p className="mt-1 text-sm font-semibold text-white/85">

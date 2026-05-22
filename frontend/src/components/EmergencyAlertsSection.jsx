@@ -80,7 +80,9 @@ export default function EmergencyAlertsSection() {
       <div className="container-premium section-padding">
         <div className="mb-9 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-end">
           <div className="max-w-3xl">
-            <span className="inline-flex rounded-full bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-yellow-200 ring-1 ring-white/10">{country.flag} Emergency alerts</span>
+            <span className="inline-flex rounded-full bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-yellow-200 ring-1 ring-white/10">
+              {country.flag} Emergency alerts
+            </span>
             <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] sm:text-4xl lg:text-5xl">
               Live alerts in {country.name}
             </h2>
