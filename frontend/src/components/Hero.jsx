@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom';
 import logoMark from '../assets/logo-mark.svg';
 import { demoMissingPersons, priorityCarouselItems } from '../lib/demoData';
 
-const statusStyles = {
-  urgent: 'bg-red-50 text-red-700',
-  missing: 'bg-amber-50 text-amber-800',
-  located: 'bg-emerald-50 text-emerald-700',
-};
-
 const formatDate = (value) =>
   new Date(value).toLocaleDateString(undefined, {
     month: 'short',
@@ -20,6 +14,7 @@ const personPath = (person) => `/missing/${person.slug || person.id}`;
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const carouselItems = useMemo(() => {
     return priorityCarouselItems.map((item) => {
@@ -35,12 +30,14 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    if (isPaused || carouselItems.length <= 1) return undefined;
+
     const interval = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % carouselItems.length);
-    }, 4500);
+    }, 8000);
 
     return () => window.clearInterval(interval);
-  }, [carouselItems.length]);
+  }, [carouselItems.length, isPaused]);
 
   const activeItem = carouselItems[activeIndex];
   const priorityPerson = activeItem.type === 'missing' ? activeItem.person : null;
@@ -95,114 +92,122 @@ export default function Hero() {
         </div>
 
         <div className="w-full max-w-[700px] justify-self-center lg:translate-x-4 lg:justify-self-end xl:translate-x-8 2xl:translate-x-10">
-          <div className="overflow-hidden rounded-[2rem] bg-white/90 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.14)] ring-1 ring-white/80 backdrop-blur-xl">
-            {activeItem.type === 'missing' ? (
-              <div className="rounded-[1.6rem] bg-gradient-to-br from-red-700 via-red-600 to-rose-700 p-3 text-white shadow-[0_20px_50px_rgba(185,28,28,0.28)]">
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-2 px-1">
-                  <div>
-                    <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-white">
-                      <span className="grid h-7 w-7 place-items-center rounded-full bg-white/18 text-base ring-1 ring-white/25">🚨</span>
-                      Priority Alert
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-white/85">Featured / Sponsored · Boosted visibility</p>
-                  </div>
-                  <span className="badge bg-white text-red-700 shadow-sm">Urgent</span>
-                </div>
-
-                <div key={priorityPerson.id} className="grid gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
-                  <div className="overflow-hidden rounded-[1.35rem] bg-red-950/25 ring-1 ring-white/15">
-                    <div className="relative aspect-[4/3] h-full min-h-[250px]">
-                      <img
-                        src={priorityPerson.photo_url}
-                        alt={priorityPerson.name}
-                        className="h-full w-full object-cover"
-                        loading="eager"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-red-950/95 to-transparent p-4">
-                        <p className="text-2xl font-black leading-tight">{priorityPerson.name}</p>
-                        <p className="mt-1 text-sm font-semibold text-white/85">
-                          {priorityPerson.age} years · {priorityPerson.parish}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950 shadow-lg">
+          <div
+            className="overflow-hidden rounded-[2rem] bg-white/90 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.14)] ring-1 ring-white/80 backdrop-blur-xl"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
+          >
+            <div className="relative h-[760px] sm:h-[700px] md:h-[500px] lg:h-[520px] xl:h-[520px]">
+              {activeItem.type === 'missing' ? (
+                <div key={activeItem.id} className="priority-slide absolute inset-0 flex flex-col overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-red-700 via-red-600 to-rose-700 p-3 text-white shadow-[0_20px_50px_rgba(185,28,28,0.28)]">
+                  <div className="mb-3 flex shrink-0 flex-wrap items-center justify-between gap-2 px-1">
                     <div>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="badge bg-red-50 text-red-700 ring-1 ring-red-100">Featured / Sponsored</span>
-                        <span className="badge bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200">Boosted visibility</span>
-                      </div>
-
-                      <div className="mt-5 space-y-4 text-sm">
-                        <div>
-                          <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">Parish / Location</p>
-                          <p className="mt-1 font-black text-slate-950">{priorityPerson.parish}</p>
-                          <p className="mt-1 leading-5 text-slate-600">{priorityPerson.last_seen_location}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">Missing date</p>
-                          <p className="mt-1 font-black text-slate-950">{formatDate(priorityPerson.date_missing)}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-5 rounded-2xl bg-red-50 p-4 ring-1 ring-red-100">
-                      <p className="text-sm font-black text-red-800">Paid priority placement</p>
-                      <p className="mt-1 text-xs font-semibold leading-5 text-red-700">
-                        This alert is promoted at the top for faster community visibility.
+                      <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-white">
+                        <span className="grid h-7 w-7 place-items-center rounded-full bg-white/18 text-base ring-1 ring-white/25">🚨</span>
+                        Priority Alert
                       </p>
-                      <Link to={personPath(priorityPerson)} className="btn btn-primary mt-3 !min-h-10 !w-full !bg-gradient-to-br !from-red-700 !to-red-600 !px-4 !py-2 text-xs shadow-[0_10px_22px_rgba(185,28,28,0.24)]">
-                        View Details
-                      </Link>
+                      <p className="mt-1 text-sm font-bold text-white/85">Featured / Sponsored · Boosted visibility</p>
                     </div>
+                    <span className="badge bg-white text-red-700 shadow-sm">Urgent</span>
                   </div>
-                </div>
-              </div>
-            ) : (
-              <div key={activeItem.id} className="rounded-[1.6rem] bg-gradient-to-br from-emerald-700 via-emerald-600 to-yellow-400 p-3 text-white shadow-[0_20px_50px_rgba(0,155,58,0.22)]">
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-2 px-1">
-                  <div>
-                    <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-white">
-                      <span className="grid h-7 w-7 place-items-center rounded-full bg-white/20 text-base ring-1 ring-white/30">⭐</span>
-                      Sponsored Partner
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-white/90">{activeItem.badge}</p>
-                  </div>
-                  <span className="badge bg-white text-emerald-800 shadow-sm">Paid Advertisement</span>
-                </div>
 
-                <div className="grid gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
-                  <div className="overflow-hidden rounded-[1.35rem] bg-emerald-950/20 ring-1 ring-white/15">
-                    <div className="relative aspect-[4/3] h-full min-h-[250px]">
-                      <img src={activeItem.image} alt={activeItem.businessName} className="h-full w-full object-cover" loading="eager" />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/95 to-transparent p-4">
-                        <p className="text-2xl font-black leading-tight">{activeItem.businessName}</p>
-                        <p className="mt-1 text-sm font-semibold text-white/85">{activeItem.parish}</p>
+                  <div className="grid min-h-0 flex-1 gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
+                    <div className="min-h-0 overflow-hidden rounded-[1.35rem] bg-red-950/25 ring-1 ring-white/15">
+                      <div className="relative h-full min-h-[250px]">
+                        <img
+                          src={priorityPerson.photo_url}
+                          alt={priorityPerson.name}
+                          className="h-full w-full object-cover"
+                          loading="eager"
+                        />
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-red-950/95 to-transparent p-4">
+                          <p className="text-2xl font-black leading-tight">{priorityPerson.name}</p>
+                          <p className="mt-1 text-sm font-semibold text-white/85">
+                            {priorityPerson.age} years · {priorityPerson.parish}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex min-h-0 flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950 shadow-lg">
+                      <div>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="badge bg-red-50 text-red-700 ring-1 ring-red-100">Featured / Sponsored</span>
+                          <span className="badge bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200">Boosted visibility</span>
+                        </div>
+
+                        <div className="mt-5 space-y-4 text-sm">
+                          <div>
+                            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">Parish / Location</p>
+                            <p className="mt-1 font-black text-slate-950">{priorityPerson.parish}</p>
+                            <p className="mt-1 leading-5 text-slate-600">{priorityPerson.last_seen_location}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">Missing date</p>
+                            <p className="mt-1 font-black text-slate-950">{formatDate(priorityPerson.date_missing)}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-5 rounded-2xl bg-red-50 p-4 ring-1 ring-red-100">
+                        <p className="text-sm font-black text-red-800">Paid priority placement</p>
+                        <p className="mt-1 text-xs font-semibold leading-5 text-red-700">
+                          This alert is promoted at the top for faster community visibility.
+                        </p>
+                        <Link to={personPath(priorityPerson)} className="btn btn-primary mt-3 !min-h-10 !w-full !bg-gradient-to-br !from-red-700 !to-red-600 !px-4 !py-2 text-xs shadow-[0_10px_22px_rgba(185,28,28,0.24)]">
+                          View Details
+                        </Link>
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950 shadow-lg">
+                </div>
+              ) : (
+                <div key={activeItem.id} className="priority-slide absolute inset-0 flex flex-col overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-emerald-700 via-emerald-600 to-yellow-400 p-3 text-white shadow-[0_20px_50px_rgba(0,155,58,0.22)]">
+                  <div className="mb-3 flex shrink-0 flex-wrap items-center justify-between gap-2 px-1">
                     <div>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="badge bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200">Sponsored</span>
-                        <span className="badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">High visibility</span>
-                      </div>
-                      <p className="mt-5 text-sm font-semibold leading-6 text-slate-700">{activeItem.promo}</p>
-                      <div className="mt-5 rounded-2xl bg-yellow-50 p-4 ring-1 ring-yellow-100">
-                        <p className="text-xs font-black uppercase tracking-[0.16em] text-yellow-800">Location / Parish</p>
-                        <p className="mt-1 font-black text-slate-950">{activeItem.parish}</p>
+                      <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-white">
+                        <span className="grid h-7 w-7 place-items-center rounded-full bg-white/20 text-base ring-1 ring-white/30">⭐</span>
+                        Sponsored Partner
+                      </p>
+                      <p className="mt-1 text-sm font-bold text-white/90">{activeItem.badge}</p>
+                    </div>
+                    <span className="badge bg-white text-emerald-800 shadow-sm">Paid Advertisement</span>
+                  </div>
+
+                  <div className="grid min-h-0 flex-1 gap-4 transition-opacity duration-500 md:grid-cols-[1.08fr_0.92fr] md:items-stretch">
+                    <div className="min-h-0 overflow-hidden rounded-[1.35rem] bg-emerald-950/20 ring-1 ring-white/15">
+                      <div className="relative h-full min-h-[250px]">
+                        <img src={activeItem.image} alt={activeItem.businessName} className="h-full w-full object-cover" loading="eager" />
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/95 to-transparent p-4">
+                          <p className="text-2xl font-black leading-tight">{activeItem.businessName}</p>
+                          <p className="mt-1 text-sm font-semibold text-white/85">{activeItem.parish}</p>
+                        </div>
                       </div>
                     </div>
 
-                    <a href={activeItem.ctaHref} className="btn btn-primary mt-5 !min-h-10 !w-full !px-4 !py-2 text-xs">
-                      {activeItem.ctaLabel}
-                    </a>
+                    <div className="flex min-h-0 flex-col justify-between rounded-[1.35rem] bg-white p-4 text-slate-950 shadow-lg">
+                      <div>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="badge bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200">Sponsored</span>
+                          <span className="badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">High visibility</span>
+                        </div>
+                        <p className="mt-5 text-sm font-semibold leading-6 text-slate-700">{activeItem.promo}</p>
+                        <div className="mt-5 rounded-2xl bg-yellow-50 p-4 ring-1 ring-yellow-100">
+                          <p className="text-xs font-black uppercase tracking-[0.16em] text-yellow-800">Location / Parish</p>
+                          <p className="mt-1 font-black text-slate-950">{activeItem.parish}</p>
+                        </div>
+                      </div>
+
+                      <a href={activeItem.ctaHref} className="btn btn-primary mt-5 !min-h-10 !w-full !px-4 !py-2 text-xs">
+                        {activeItem.ctaLabel}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
             <div className="mt-3 grid grid-cols-2 gap-3">
               {regularPeople.map((person) => (
@@ -230,7 +235,7 @@ export default function Hero() {
               ))}
             </div>
 
-            <div className="mt-4 flex items-center justify-center gap-2">
+            <div className="mt-4 flex min-h-[10px] items-center justify-center gap-2">
               {carouselItems.map((item, index) => (
                 <button
                   key={item.id}
