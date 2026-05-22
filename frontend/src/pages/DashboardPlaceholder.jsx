@@ -1,5 +1,8 @@
 import DashboardShell from '../components/DashboardShell';
 import AgencyRoutePanel from '../components/AgencyRoutePanel';
+import MissingPersonAlertForm from '../components/MissingPersonAlertForm';
+import BusinessAdForm from '../components/BusinessAdForm';
+import DashboardReviewList from '../components/DashboardReviewList';
 import { getAccountGroup, getStoredAccountType } from '../lib/accountTypes';
 
 const content = {
@@ -8,20 +11,10 @@ const content = {
     eyebrow: 'Alert center',
     body: 'Manage posted alerts, drafts, review status, and community response activity here.',
   },
-  createAlert: {
-    title: 'Create alert',
-    eyebrow: 'New safety alert',
-    body: 'Alert creation tools are being prepared. This area will support missing-person and emergency alert submissions.',
-  },
   billing: {
     title: 'Billing & upgrades',
     eyebrow: 'Plans coming next',
     body: 'Plan upgrades, monthly billing, annual agency licenses, and invoices will appear here when payments are connected.',
-  },
-  businessAds: {
-    title: 'Business ads',
-    eyebrow: 'Business tools',
-    body: 'Business advertising and sponsored promotion tools are coming next for paid business accounts.',
   },
   promotions: {
     title: 'Promotions',
@@ -37,6 +30,16 @@ const content = {
     title: 'Website Traffic CTA',
     eyebrow: 'Business growth',
     body: 'Future website traffic call-to-action tools will help businesses route visitors from sponsored safety placements.',
+  },
+  adPerformance: {
+    title: 'Ad Performance',
+    eyebrow: 'Business analytics',
+    body: 'Ad impressions, clicks, calls, conversions, and campaign performance will appear here when tracking is connected.',
+  },
+  planStatus: {
+    title: 'Upgrade/Plan Status',
+    eyebrow: 'Business plan',
+    body: 'Business plan status, upgrade options, invoices, and payment history will appear here when billing is connected.',
   },
   agencyLicense: {
     title: 'Agency license',
@@ -80,7 +83,8 @@ const agencyTitles = {
 
 export default function DashboardPlaceholder({ type }) {
   const accountType = getStoredAccountType();
-  const isAgency = getAccountGroup(accountType) === 'agency';
+  const group = getAccountGroup(accountType);
+  const isAgency = group === 'agency';
 
   if (isAgency) {
     const [title, eyebrow] = agencyTitles[type] || agencyTitles.overview;
@@ -88,6 +92,38 @@ export default function DashboardPlaceholder({ type }) {
     return (
       <DashboardShell title={title} eyebrow={eyebrow}>
         <AgencyRoutePanel type={type} />
+      </DashboardShell>
+    );
+  }
+
+  if (type === 'createAlert') {
+    return (
+      <DashboardShell title="Create Missing Person Alert" eyebrow="Missing person submission">
+        <MissingPersonAlertForm accountType={accountType} />
+      </DashboardShell>
+    );
+  }
+
+  if (type === 'businessAds') {
+    return (
+      <DashboardShell title="Create Business Ad" eyebrow="Business promotion">
+        <BusinessAdForm />
+      </DashboardShell>
+    );
+  }
+
+  if (type === 'myMissingAlerts') {
+    return (
+      <DashboardShell title="My Missing Person Alerts" eyebrow="Review queue">
+        <DashboardReviewList type="missing" />
+      </DashboardShell>
+    );
+  }
+
+  if (type === 'myAds') {
+    return (
+      <DashboardShell title="My Ads" eyebrow="Business submissions">
+        <DashboardReviewList type="ads" />
       </DashboardShell>
     );
   }

@@ -36,11 +36,15 @@ export default function App() {
         <Route path="/dashboard/overview" element={<DashboardPlaceholder type="overview" />} />
         <Route path="/dashboard/alerts" element={<DashboardPlaceholder type="alerts" />} />
         <Route path="/dashboard/create-alert" element={<DashboardPlaceholder type="createAlert" />} />
+        <Route path="/dashboard/my-missing-alerts" element={<DashboardPlaceholder type="myMissingAlerts" />} />
         <Route path="/dashboard/billing" element={<DashboardPlaceholder type="billing" />} />
         <Route path="/dashboard/business-ads" element={<DashboardPlaceholder type="businessAds" />} />
+        <Route path="/dashboard/my-ads" element={<DashboardPlaceholder type="myAds" />} />
         <Route path="/dashboard/promotions" element={<DashboardPlaceholder type="promotions" />} />
         <Route path="/dashboard/campaigns" element={<DashboardPlaceholder type="campaigns" />} />
         <Route path="/dashboard/website-traffic" element={<DashboardPlaceholder type="websiteTraffic" />} />
+        <Route path="/dashboard/ad-performance" element={<DashboardPlaceholder type="adPerformance" />} />
+        <Route path="/dashboard/plan-status" element={<DashboardPlaceholder type="planStatus" />} />
         <Route path="/dashboard/agency-license" element={<DashboardPlaceholder type="agencyLicense" />} />
         <Route path="/dashboard/verified-reports" element={<DashboardPlaceholder type="verifiedReports" />} />
         <Route path="/dashboard/missing-persons" element={<DashboardPlaceholder type="missingPersons" />} />
