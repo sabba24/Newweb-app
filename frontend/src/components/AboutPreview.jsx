@@ -1,7 +1,7 @@
 export default function AboutPreview() {
   return (
-    <section className="py-20 bg-white" id="about-preview">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-14 bg-white" id="about-preview">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">About 876Alert</h2>
           <p className="mt-4 text-gray-700">876Alert is a Jamaica-first public safety platform. We connect communities, volunteers, and officials with timely information to improve outcomes in emergencies and missing person cases.</p>

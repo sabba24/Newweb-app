@@ -22,24 +22,25 @@ body {
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: none; }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem; /* rounded-lg */
-  padding: 0.5rem 1rem; /* px-4 py-2 */
+  border-radius: 0.6rem; /* rounded-xl */
+  padding: 0.6rem 1.05rem; /* tighter, premium */
   font-weight: 600;
-  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms, border-color 150ms, color 150ms;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms, border-color 150ms, color 150ms, opacity 150ms;
 }
 
-.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.3); }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.28); }
 
 .btn-primary {
   background: linear-gradient(180deg, #00a34a 0%, #009B3A 100%);
   color: #ffffff;
-  box-shadow: 0 8px 20px rgba(0,155,58,0.18);
+  box-shadow: 0 10px 22px rgba(0,155,58,0.16);
 }
-.btn-primary:hover { filter: brightness(0.97); transform: translateY(-1px); }
+.btn-primary:hover { filter: brightness(0.98); transform: translateY(-1px); }
 
 .btn-outline {
   border: 1px solid var(--jamaica-green);
@@ -48,4 +49,22 @@ a:hover { text-decoration: none; }
 }
 .btn-outline:hover { background-color: rgba(0,155,58,0.06); }
 
+/* Cards and badges */
+.card { background:#fff; border-radius:1rem; box-shadow: 0 6px 24px rgba(2,6,23,0.06); }
+.card-ring { box-shadow:none; border-radius:1rem; outline: 1px solid rgba(2,6,23,0.06); }
+.badge { display:inline-block; font-size:11px; padding:2px 8px; border-radius:9999px; }
+
+/* Navbar underline hover */
+.nav-link { position: relative; }
+.nav-link::after { content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background: var(--jamaica-green); transform: scaleX(0); transform-origin:left; transition: transform .2s ease; }
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* Subtle animations */
+@keyframes pulseSoft { 0%{opacity:.8; transform: scale(1)} 50%{opacity:.4; transform: scale(1.06)} 100%{opacity:.8; transform: scale(1)} }
+.animate-pulse-soft { animation: pulseSoft 3.2s ease-in-out infinite; }
+
+@keyframes floatUp { 0% { transform: translateY(0) } 50% { transform: translateY(-4px) } 100% { transform: translateY(0) } }
+.animate-float { animation: floatUp 4.5s ease-in-out infinite; }
+
+/* Section background */
 .section-muted { background: linear-gradient(180deg, #ffffff 0%, #F8FAFC 100%); }

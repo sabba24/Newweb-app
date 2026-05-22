@@ -5,11 +5,11 @@ import logo from '../assets/logo.svg';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const linkBase = 'text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors';
+  const linkBase = 'nav-link text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors';
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-black/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-lg border-b border-black/5">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="876Alert" className="h-7 w-auto"/>

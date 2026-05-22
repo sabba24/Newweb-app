@@ -11,9 +11,9 @@ export default function Stats() {
     )},
   ];
   return (
-    <section className="py-16 section-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <section className="py-12 section-muted">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {items.map((s) => (
             <div key={s.label} className="rounded-2xl bg-white p-6 text-center shadow-md ring-1 ring-black/5">
               <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-emerald-50">{s.icon}</div>
