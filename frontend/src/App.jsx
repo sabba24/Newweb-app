@@ -6,6 +6,9 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import SafetyTips from './pages/SafetyTips';
+import EmergencyResources from './pages/EmergencyResources';
+import Setup from './pages/Setup';
 
 export default function App() {
   return (
@@ -18,6 +21,9 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/safety-tips" element={<SafetyTips />} />
+        <Route path="/emergency-resources" element={<EmergencyResources />} />
+        <Route path="/setup" element={<Setup />} />
       </Routes>
     </BrowserRouter>
   );

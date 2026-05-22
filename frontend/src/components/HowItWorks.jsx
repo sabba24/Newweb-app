@@ -1,23 +1,26 @@
 export default function HowItWorks() {
   const steps = [
-    { num: 1, title: 'Report', desc: 'Submit missing person reports or safety alerts with details and location.' },
-    { num: 2, title: 'Verify', desc: 'Community and officials review and verify critical information.' },
-    { num: 3, title: 'Notify', desc: 'Urgent alerts reach people in relevant parishes instantly.' },
-    { num: 4, title: 'Respond', desc: 'With timely information, communities act swiftly and safely.' },
+    { num: '01', title: 'Report', desc: 'Submit missing-person details, photos, parish, last-seen location, and contact information.' },
+    { num: '02', title: 'Verify', desc: 'Community leaders and officials can review details before wider public sharing.' },
+    { num: '03', title: 'Alert', desc: 'Important notices are organized by parish, severity, and most recent updates.' },
+    { num: '04', title: 'Respond', desc: 'Families, responders, and neighbours act with clearer information and safer coordination.' },
   ];
+
   return (
-    <section className="py-20 bg-white" id="how-it-works">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">How it works</h2>
-          <p className="text-gray-600">A simple, trusted flow for public safety</p>
+    <section className="bg-white py-16 sm:py-24" id="how-it-works">
+      <div className="container-premium">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <span className="badge bg-yellow-50 text-yellow-800">Trusted response flow</span>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-gray-950 sm:text-5xl">Simple enough for emergencies</h2>
+          <p className="mt-4 text-lg leading-8 text-gray-600">A clear workflow designed for families, volunteers, NGOs, and public safety partners.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {steps.map((s) => (
-            <div key={s.num} className="rounded-2xl border bg-white p-6 shadow-sm">
-              <div className="w-10 h-10 rounded-full grid place-items-center font-bold text-white" style={{background:'#009B3A'}}>{s.num}</div>
-              <h3 className="mt-4 text-lg font-semibold text-gray-900">{s.title}</h3>
-              <p className="text-gray-600">{s.desc}</p>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
+          {steps.map((step) => (
+            <div key={step.num} className="card-premium rounded-[1.75rem] p-6">
+              <div className="text-sm font-black tracking-[0.25em] text-emerald-600">{step.num}</div>
+              <h3 className="mt-5 text-xl font-black text-gray-950">{step.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-gray-600">{step.desc}</p>
             </div>
           ))}
         </div>

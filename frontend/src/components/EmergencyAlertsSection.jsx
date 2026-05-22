@@ -1,62 +1,113 @@
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 import { demoAlerts } from '../lib/demoData';
+import AlertTicker from './AlertTicker';
+import SkeletonCard from './SkeletonCard';
 
-const badgeClass = (severity) => {
+const severityClass = (severity) => {
   switch (severity) {
     case 'critical':
-      return 'bg-red-100 text-red-800 border border-red-200';
+      return 'bg-red-50 text-red-700 border-red-100';
     case 'warning':
-      return 'bg-yellow-100 text-yellow-800 border border-yellow-200';
+      return 'bg-yellow-50 text-yellow-800 border-yellow-100';
     default:
-      return 'bg-emerald-100 text-emerald-800 border border-emerald-200';
+      return 'bg-emerald-50 text-emerald-700 border-emerald-100';
   }
 };
 
+const alertIcon = (type) => {
+  if (type === 'traffic') return '🚧';
+  if (type === 'weather') return '⛈️';
+  if (type === 'missing person') return '🚨';
+  if (type === 'community') return '🤝';
+  return '⚠️';
+};
+
+function normalizeApiAlert(alert, index) {
+  const fallback = demoAlerts[index % demoAlerts.length];
+
+  return {
+    ...fallback,
+    ...alert,
+    parish: alert.parish || fallback.parish,
+    type: alert.type || fallback.type,
+    timestamp: alert.timestamp || alert.created_at || fallback.timestamp,
+    image: alert.image || fallback.image,
+  };
+}
+
 export default function EmergencyAlertsSection() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(demoAlerts);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
-    api.get('/alerts?limit=5')
+
+    api.get('/alerts?limit=8')
       .then((res) => {
-        const data = Array.isArray(res.data) && res.data.length ? res.data : demoAlerts;
-        if (mounted) setItems(data);
+        const apiItems = Array.isArray(res.data) ? res.data.map(normalizeApiAlert) : [];
+        const apiIds = new Set(apiItems.map((item) => item.id));
+        const merged = [...apiItems, ...demoAlerts.filter((item) => !apiIds.has(item.id))];
+
+        if (mounted) setItems(merged);
       })
       .catch(() => setItems(demoAlerts))
-      .finally(() => setLoading(false));
-    return () => { mounted = false; };
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
-    <section id="alerts" className="py-20 bg-emerald-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-10">
+    <section id="alerts" className="overflow-hidden bg-emerald-950 py-0 text-white">
+      <AlertTicker alerts={items.slice(0, 5)} />
+
+      <div className="container-premium py-16 sm:py-24">
+        <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_0.7fr] lg:items-end">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Emergency Alerts</h2>
-            <p className="text-gray-600">Stay up to date and stay safe.</p>
+            <span className="badge bg-white/10 text-yellow-200 ring-1 ring-white/10">Emergency operations feed</span>
+            <h2 className="mt-4 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">Live safety alerts by parish</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-emerald-50/80">
+              Critical weather, traffic, missing-person, and community notices are organized by severity so people can respond quickly.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-yellow-200">Emergency numbers</p>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <a href="tel:119" className="rounded-2xl bg-white p-4 text-center font-black text-gray-950">119 Police</a>
+              <a href="tel:110" className="rounded-2xl bg-white p-4 text-center font-black text-gray-950">110 Fire/EMS</a>
+            </div>
           </div>
         </div>
+
         {loading ? (
-          <div className="text-center text-gray-500">Loading…</div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {items.map((a) => (
-              <article key={a.id} className="rounded-xl border bg-white overflow-hidden shadow-sm">
-                {a.image && (
-                  <div className="aspect-[16/10] bg-gray-50">
-                    <img src={a.image} alt="" className="w-full h-full object-cover"/>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {items.map((alert) => (
+              <article key={alert.id} className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-gray-950 shadow-2xl">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img src={alert.image} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute left-4 top-4 text-3xl">{alertIcon(alert.type)}</div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className={`badge border ${severityClass(alert.severity)}`}>{alert.severity}</span>
                   </div>
-                )}
-                <div className="p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="font-semibold text-lg text-gray-900">{a.title}</h3>
-                      <p className="text-gray-700 mt-1">{a.message}</p>
-                    </div>
-                    <span className={`text-xs px-2 py-1 rounded-md ${badgeClass(a.severity)}`}>{a.severity}</span>
-                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-700">{alert.parish} · {alert.type}</p>
+                  <h3 className="mt-2 text-xl font-black">{alert.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-gray-600">{alert.message}</p>
+                  <p className="mt-4 text-xs font-bold text-gray-400">
+                    Updated {new Date(alert.timestamp).toLocaleString()}
+                  </p>
                 </div>
               </article>
             ))}

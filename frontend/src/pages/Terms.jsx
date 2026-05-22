@@ -2,14 +2,29 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function Terms() {
+  const sections = [
+    ['Responsible use', 'Use 876Alert lawfully, respectfully, and only for accurate safety-related communication.'],
+    ['No harmful content', 'Do not post false reports, harassment, private information without cause, or content that endangers others.'],
+    ['Verification matters', 'Report sightings and emergency details accurately and avoid spreading rumours.'],
+    ['Updates', 'These terms may be updated as the platform and public safety workflows evolve.'],
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="flex min-h-screen flex-col bg-white">
       <Navbar />
       <main className="flex-1">
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">Terms of Service</h1>
-            <p className="mt-4 text-gray-700">By using 876Alert, you agree to use the platform lawfully, refrain from posting harmful content, and comply with applicable laws. We may update these terms periodically.</p>
+        <section className="bg-gradient-to-b from-white to-emerald-50 py-16 sm:py-24">
+          <div className="container-premium max-w-4xl">
+            <span className="badge bg-yellow-50 text-yellow-800">Terms & Conditions</span>
+            <h1 className="mt-5 text-5xl font-black tracking-tight text-gray-950">Clear rules for a trusted public safety platform.</h1>
+            <div className="mt-10 grid gap-4">
+              {sections.map(([title, text]) => (
+                <div key={title} className="card-premium rounded-3xl p-6">
+                  <h2 className="text-xl font-black text-gray-950">{title}</h2>
+                  <p className="mt-3 leading-7 text-gray-600">{text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>

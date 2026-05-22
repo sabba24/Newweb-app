@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AuthLayout from '../components/AuthLayout';
 import { api, setAuthToken } from '../lib/api';
-import logo from '../assets/logo.svg';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     setError('');
+
     try {
       const { data } = await api.post('/register', form);
       setAuthToken(data.token);
@@ -28,35 +29,29 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 bg-gradient-to-b from-white to-emerald-50/60">
-        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-white border rounded-2xl shadow-sm p-8">
-            <div className="flex justify-center mb-6">
-              <img src={logo} alt="876Alert" className="h-8" />
-            </div>
-            <h1 className="text-2xl font-bold mb-6 text-center">Create your account</h1>
-            {error && <div className="mb-4 text-sm text-red-600">{error}</div>}
-            <form onSubmit={onSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Name</label>
-                <input type="text" className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" required value={form.name} onChange={(e)=>setForm({...form, name: e.target.value})} />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input type="email" className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" required value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Password</label>
-                <input type="password" className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" required value={form.password} onChange={(e)=>setForm({...form, password: e.target.value})} />
-              </div>
-              <button disabled={loading} className="btn btn-primary w-full">{loading ? 'Creating account...' : 'Create account'}</button>
-            </form>
-            <p className="mt-6 text-sm text-gray-600 text-center">Already have an account? <Link className="text-emerald-700" to="/login">Login</Link></p>
+      <AuthLayout title="Create your account" subtitle="Join the network helping communities respond faster.">
+        {error && <div className="mb-4 rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">{error}</div>}
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div>
+            <label className="mb-2 block text-sm font-black text-gray-800">Name</label>
+            <input type="text" className="input-premium" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" />
           </div>
-        </div>
-      </main>
+          <div>
+            <label className="mb-2 block text-sm font-black text-gray-800">Email</label>
+            <input type="email" className="input-premium" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" />
+          </div>
+          <div>
+            <label className="mb-2 block text-sm font-black text-gray-800">Password</label>
+            <input type="password" className="input-premium" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Use a strong password" />
+          </div>
+          <button disabled={loading} className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70">{loading ? 'Creating account...' : 'Create account'}</button>
+        </form>
+        <p className="mt-6 text-center text-sm font-semibold text-gray-600">
+          Already have an account? <Link className="font-black text-emerald-700 hover:underline" to="/login">Sign in</Link>
+        </p>
+      </AuthLayout>
       <Footer />
     </div>
   );
