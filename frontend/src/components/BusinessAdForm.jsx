@@ -7,6 +7,7 @@ const initialForm = {
   ad_title: '',
   promo_description: '',
   discount_amount: '',
+  has_website: 'no',
   website_url: '',
   call_phone: '',
   location: '',
@@ -32,11 +33,16 @@ export default function BusinessAdForm() {
   }
 
   function validate() {
-    const required = ['business_name', 'ad_title', 'promo_description', 'website_url', 'call_phone', 'location', 'start_date', 'end_date'];
+    const required = ['business_name', 'ad_title', 'promo_description', 'call_phone', 'location', 'start_date', 'end_date'];
     const missing = required.find((field) => !String(form[field]).trim());
 
     if (missing) {
       setStatus({ type: 'error', message: 'Please complete all required ad fields before submitting.' });
+      return false;
+    }
+
+    if (form.has_website === 'yes' && !form.website_url.trim()) {
+      setStatus({ type: 'error', message: 'Please enter your website URL or select No.' });
       return false;
     }
 
@@ -57,11 +63,14 @@ export default function BusinessAdForm() {
     setStatus({ type: '', message: '' });
 
     const payload = new FormData();
-    Object.entries(form).forEach(([key, value]) => payload.append(key, value));
+    Object.entries(form).forEach(([key, value]) => {
+      if (key !== 'has_website') payload.append(key, form.has_website === 'no' && key === 'website_url' ? '' : value);
+    });
     payload.append('ad_image', adImage);
 
     const savedPayload = {
       ...form,
+      website_url: form.has_website === 'no' ? '' : form.website_url,
       image_preview: imagePreview,
     };
 
@@ -125,10 +134,31 @@ export default function BusinessAdForm() {
         <section>
           <h3 className="text-xl font-black text-slate-950">CTA and campaign settings</h3>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <label className="grid gap-2 text-sm font-black text-slate-800">
-              Website URL *
-              <input type="url" className="input-premium" value={form.website_url} onChange={(event) => updateField('website_url', event.target.value)} />
-            </label>
+            <div className="grid gap-2 text-sm font-black text-slate-800 sm:col-span-2 xl:col-span-4">
+              Do you have a website?
+              <div className="grid gap-3 sm:grid-cols-2">
+                {['yes', 'no'].map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => updateField('has_website', option)}
+                    className={`rounded-2xl border px-4 py-3 text-left font-black capitalize transition ${
+                      form.has_website === option ? 'border-emerald-500 bg-emerald-50 text-emerald-800' : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {form.has_website === 'yes' && (
+              <label className="grid gap-2 text-sm font-black text-slate-800 sm:col-span-2">
+                Website URL
+                <input type="url" className="input-premium" value={form.website_url} onChange={(event) => updateField('website_url', event.target.value)} placeholder="https://example.com" />
+              </label>
+            )}
+
             <label className="grid gap-2 text-sm font-black text-slate-800">
               Call phone number *
               <input className="input-premium" value={form.call_phone} onChange={(event) => updateField('call_phone', event.target.value)} />
@@ -144,6 +174,7 @@ export default function BusinessAdForm() {
                 <option>Call Now</option>
                 <option>Learn More</option>
                 <option>Book Now</option>
+                <option>Promotion</option>
               </select>
             </label>
             <label className="grid gap-2 text-sm font-black text-slate-800">
@@ -171,6 +202,11 @@ export default function BusinessAdForm() {
             {imagePreview && <img src={imagePreview} alt="Ad preview" className="h-64 w-full rounded-3xl object-cover ring-1 ring-slate-100" />}
           </div>
         </section>
+
+        <div className="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-100">
+          <p className="text-sm font-black text-slate-950">Payment integration coming next</p>
+          <p className="mt-1 text-sm font-semibold leading-6 text-slate-600">This ad will be submitted for review/payment. Stripe and PayPal buttons will be connected later.</p>
+        </div>
 
         <button disabled={submitting} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60">
           {submitting ? 'Submitting for review/payment...' : 'Submit for review/payment'}

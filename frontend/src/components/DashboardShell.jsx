@@ -8,8 +8,8 @@ const menus = {
     ['Dashboard', '/dashboard'],
     ['Create Missing Alert', '/dashboard/create-alert'],
     ['My Missing Alerts', '/dashboard/my-missing-alerts'],
-    ['Tips', '/safety-tips'],
-    ['Upgrade', '/dashboard/billing'],
+    ['Safety Tips', '/safety-tips'],
+    ['Plans', '/plans'],
   ],
   business: [
     ['Dashboard', '/dashboard'],
@@ -147,7 +147,9 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
 
   const accountLabel = getAccountLabel(accountType);
   const menu = menuFor(accountType);
-  const isAgency = getAccountGroup(accountType) === 'agency';
+  const group = getAccountGroup(accountType);
+  const isAgency = group === 'agency';
+  const isBusiness = group === 'business';
   const displayTitle = isAgency && title.includes('Welcome') ? 'Agency Operations Center' : title;
 
   const navClass = ({ isActive }) =>
@@ -158,7 +160,9 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
             : 'text-slate-600 hover:bg-blue-50 hover:text-blue-800'
         }`
       : `rounded-2xl px-4 py-3 text-sm font-black transition ${
-          isActive ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-700'
+          isActive
+            ? `${isBusiness ? 'bg-slate-900' : 'bg-emerald-600'} text-white shadow-lg`
+            : `${isBusiness ? 'text-slate-700 hover:bg-slate-100 hover:text-slate-950' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-700'}`
         }`;
 
   if (isAgency) {
@@ -213,7 +217,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#f8fafc_0%,#ecfdf5_55%,#fff8d7_100%)]">
+    <div className={`min-h-screen ${isBusiness ? 'bg-[linear-gradient(135deg,#f8fafc_0%,#f1f5f9_55%,#fff8d7_100%)]' : 'bg-[linear-gradient(135deg,#f8fafc_0%,#ecfdf5_55%,#fff8d7_100%)]'}`}>
       <div className="container-premium py-5">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] bg-white/90 p-4 shadow-sm ring-1 ring-slate-100 backdrop-blur">
           <Link to="/" className="flex items-center gap-3">
@@ -221,19 +225,23 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
           </Link>
           <div className="flex flex-wrap items-center gap-3">
             <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
-            <span className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
+            <span className={`rounded-full px-4 py-2 text-xs font-black uppercase tracking-wide ring-1 ${
+              isBusiness ? 'bg-slate-100 text-slate-800 ring-slate-200' : 'bg-emerald-50 text-emerald-700 ring-emerald-100'
+            }`}>
               {accountLabel}
             </span>
             <Link to="/" className="btn btn-outline !min-h-10 !px-4 !py-2 text-xs">Back to site</Link>
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-5 lg:grid-cols-[290px_1fr]">
           <aside className="rounded-[2rem] bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto">
-            <div className="rounded-3xl bg-emerald-950 p-5 text-white">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-yellow-300">Account</p>
+            <div className={`rounded-3xl p-5 text-white ${isBusiness ? 'bg-slate-950' : 'bg-emerald-950'}`}>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-yellow-300">{isBusiness ? 'Business Account' : 'Community Account'}</p>
               <h2 className="mt-2 text-2xl font-black">{accountLabel}</h2>
-              <p className="mt-2 text-sm font-semibold leading-6 text-emerald-50/80">Manage safety alerts, usage, and plan access.</p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-white/80">
+                {isBusiness ? 'Manage ads, promotions, billing, and sponsored visibility.' : 'Create alerts, track usage, and access safety tools.'}
+              </p>
             </div>
 
             <nav className="mt-4 grid gap-1">
@@ -247,7 +255,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
 
           <main className="min-w-0">
             <div className="mb-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100 sm:p-8">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">{eyebrow}</p>
+              <p className={`text-sm font-black uppercase tracking-[0.18em] ${isBusiness ? 'text-slate-700' : 'text-emerald-700'}`}>{eyebrow}</p>
               <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{displayTitle}</h1>
             </div>
             {typeof children === 'function' ? children({ accountType, accountLabel }) : children}

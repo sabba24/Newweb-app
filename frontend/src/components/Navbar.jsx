@@ -39,6 +39,7 @@ export default function Navbar() {
               <NavLink to="/" className={navClass}>Home</NavLink>
               <a href="/#missing" className="rounded-full px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Missing Persons</a>
               <a href="/#alerts" className="rounded-full px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Alerts</a>
+              <NavLink to="/plans" className={navClass}>Plans</NavLink>
               <NavLink to="/about" className={navClass}>About</NavLink>
               <NavLink to="/contact" className={navClass}>Contact</NavLink>
             </nav>
@@ -85,6 +86,7 @@ export default function Navbar() {
                 <Link to="/" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Home</Link>
                 <a href="/#missing" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Missing Persons</a>
                 <a href="/#alerts" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Alerts</a>
+                <Link to="/plans" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Plans</Link>
                 <Link to="/about" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">About</Link>
                 <Link to="/contact" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Contact</Link>
               </div>
