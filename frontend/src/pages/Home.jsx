@@ -5,6 +5,8 @@ import EmergencyAlertsSection from '../components/EmergencyAlertsSection';
 import Stats from '../components/Stats';
 import HowItWorks from '../components/HowItWorks';
 import TrustSafety from '../components/TrustSafety';
+import AboutPreview from '../components/AboutPreview';
+import ContactCTA from '../components/ContactCTA';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -18,6 +20,8 @@ export default function Home() {
         <EmergencyAlertsSection />
         <HowItWorks />
         <TrustSafety />
+        <AboutPreview />
+        <ContactCTA />
       </main>
       <Footer />
     </div>

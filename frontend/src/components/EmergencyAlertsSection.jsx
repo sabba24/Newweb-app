@@ -5,11 +5,11 @@ import { demoAlerts } from '../lib/demoData';
 const badgeClass = (severity) => {
   switch (severity) {
     case 'critical':
-      return 'bg-red-100 text-red-800 border border-red-200';
+      return 'bg-red-100 text-red-800';
     case 'warning':
-      return 'bg-yellow-100 text-yellow-800 border border-yellow-200';
+      return 'bg-yellow-100 text-yellow-800';
     default:
-      return 'bg-emerald-100 text-emerald-800 border border-emerald-200';
+      return 'bg-emerald-100 text-emerald-800';
   }
 };
 
@@ -19,9 +19,9 @@ export default function EmergencyAlertsSection() {
 
   useEffect(() => {
     let mounted = true;
-    api.get('/alerts?limit=5')
+    api.get('/alerts?limit=3')
       .then((res) => {
-        const data = Array.isArray(res.data) && res.data.length ? res.data : demoAlerts;
+        const data = Array.isArray(res.data) && res.data.length ? res.data.slice(0,3) : demoAlerts;
         if (mounted) setItems(data);
       })
       .catch(() => setItems(demoAlerts))
@@ -43,19 +43,19 @@ export default function EmergencyAlertsSection() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {items.map((a) => (
-              <article key={a.id} className="rounded-xl border bg-white overflow-hidden shadow-sm">
+              <article key={a.id} className="rounded-xl overflow-hidden bg-white shadow-md ring-1 ring-black/5">
                 {a.image && (
-                  <div className="aspect-[16/10] bg-gray-50">
+                  <div className="aspect-[4/3] bg-gray-50">
                     <img src={a.image} alt="" className="w-full h-full object-cover"/>
                   </div>
                 )}
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="font-semibold text-lg text-gray-900">{a.title}</h3>
-                      <p className="text-gray-700 mt-1">{a.message}</p>
+                      <h3 className="font-semibold text-base text-gray-900">{a.title}</h3>
+                      <p className="text-gray-700 mt-1 text-sm">{a.message}</p>
                     </div>
-                    <span className={`text-xs px-2 py-1 rounded-md ${badgeClass(a.severity)}`}>{a.severity}</span>
+                    <span className={`text-[11px] px-2 py-0.5 rounded-full ${badgeClass(a.severity)}`}>{a.severity}</span>
                   </div>
                 </div>
               </article>
