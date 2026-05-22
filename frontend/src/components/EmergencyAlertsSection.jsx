@@ -66,18 +66,18 @@ export default function EmergencyAlertsSection() {
       <AlertTicker alerts={items.slice(0, 5)} />
 
       <div className="container-premium section-padding">
-        <div className="mb-8 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-end">
-          <div className="section-heading">
-            <span className="inline-flex rounded-full bg-white/10 px-3 py-2 text-xs font-black text-yellow-200 ring-1 ring-white/10">Emergency alerts</span>
+        <div className="mb-9 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-end">
+          <div className="max-w-3xl">
+            <span className="inline-flex rounded-full bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-yellow-200 ring-1 ring-white/10">Emergency alerts</span>
             <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] sm:text-4xl lg:text-5xl">
               Live alerts by parish and severity
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-              Weather, traffic, missing-person, and community alerts displayed in a cleaner operational feed.
+              Weather, traffic, missing-person, and community alerts displayed in a clean operational feed.
             </p>
           </div>
 
-          <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/10 backdrop-blur">
+          <div className="rounded-3xl bg-white/10 p-4 ring-1 ring-white/10 backdrop-blur">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-yellow-200">Emergency contacts</p>
             <div className="mt-3 grid grid-cols-2 gap-3">
               <a href="tel:119" className="rounded-2xl bg-white p-4 text-center font-black text-slate-950">119 Police</a>
@@ -87,18 +87,18 @@ export default function EmergencyAlertsSection() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {Array.from({ length: 4 }).map((_, index) => (
               <SkeletonCard key={index} />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {items.map((alert) => (
-              <article key={alert.id} className="overflow-hidden rounded-2xl bg-white text-slate-950 shadow-xl">
+              <article key={alert.id} className="overflow-hidden rounded-3xl bg-white text-slate-950 shadow-xl">
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <img src={alert.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/62 to-transparent" />
                   <div className="absolute left-3 top-3 text-2xl">{alertIcon(alert.type)}</div>
                   <div className="absolute bottom-3 left-3">
                     <span className={`badge ${severityClass(alert.severity)}`}>{alert.severity}</span>

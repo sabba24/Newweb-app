@@ -10,7 +10,9 @@ export default function Footer() {
       <div className="container-premium py-14">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <section>
-            <img src={logo} className="h-11 w-auto max-w-[184px] brightness-[1.15]" alt="876Alert" />
+            <div className="rounded-2xl bg-white p-3 w-fit">
+              <img src={logo} className="h-[42px] w-[174px] object-contain" alt="876Alert" />
+            </div>
             <p className="mt-5 max-w-sm text-sm leading-7 text-emerald-50/80">
               Jamaica’s community-first missing persons and emergency alert platform for faster reporting, clearer updates, and safer public response.
             </p>

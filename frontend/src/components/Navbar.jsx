@@ -22,20 +22,22 @@ export default function Navbar() {
   }
 
   const navClass = ({ isActive }) =>
-    `rounded-full px-3 py-2 transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-50 hover:text-emerald-700'}`;
+    `rounded-full px-4 py-2 text-sm font-extrabold transition ${
+      isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-50 hover:text-emerald-700'
+    }`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/88 backdrop-blur-xl shadow-[0_1px_0_rgba(15,23,42,0.03)]">
+    <header className="sticky top-0 z-50 bg-white/92 shadow-[0_1px_20px_rgba(15,23,42,0.06)] backdrop-blur-xl">
       <div className="container-premium">
-        <div className="flex min-h-[78px] items-center justify-between gap-4 py-3">
+        <div className="flex min-h-[76px] items-center justify-between gap-5">
           <Link to="/" className="flex shrink-0 items-center" aria-label="876Alert home">
-            <img src={logo} alt="876Alert" className="h-10 w-auto max-w-[184px] sm:h-11" />
+            <img src={logo} alt="876Alert" className="h-[46px] w-[190px] object-contain" />
           </Link>
 
-          <nav className="hidden items-center gap-1 text-sm font-extrabold xl:flex">
+          <nav className="hidden items-center justify-center gap-1 lg:flex">
             <NavLink to="/" className={navClass}>Home</NavLink>
-            <a href="/#missing" className="rounded-full px-3 py-2 text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Missing Persons</a>
-            <a href="/#alerts" className="rounded-full px-3 py-2 text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Alerts</a>
+            <a href="/#missing" className="rounded-full px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Missing Persons</a>
+            <a href="/#alerts" className="rounded-full px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:bg-slate-50 hover:text-emerald-700">Alerts</a>
             <NavLink to="/about" className={navClass}>About</NavLink>
             <NavLink to="/contact" className={navClass}>Contact</NavLink>
           </nav>
@@ -57,13 +59,13 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link to="/login" className="btn btn-outline !min-h-11 !px-4">Login</Link>
-                <Link to="/register" className="btn btn-primary !min-h-11 !px-4">Register</Link>
+                <Link to="/login" className="btn btn-outline !min-h-11 !px-5">Login</Link>
+                <Link to="/register" className="btn btn-primary !min-h-11 !px-5">Register</Link>
               </>
             )}
           </div>
 
-          <button className="grid h-11 w-11 place-items-center rounded-full bg-white text-slate-800 shadow-sm ring-1 ring-slate-200 xl:hidden" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu">
+          <button className="grid h-11 w-11 place-items-center rounded-full bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu">
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               {open ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -75,8 +77,8 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="pb-4 xl:hidden">
-            <div className="rounded-3xl bg-white p-3 shadow-xl ring-1 ring-slate-200/80">
+          <div className="pb-4 lg:hidden">
+            <div className="rounded-3xl bg-white p-3 shadow-xl ring-1 ring-slate-100">
               <div className="grid gap-1 text-sm font-extrabold">
                 <Link to="/" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Home</Link>
                 <a href="/#missing" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Missing Persons</a>
