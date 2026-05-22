@@ -35,23 +35,11 @@ const routeContent = {
     body: 'Prioritize incident dispatch, route assignments, field response timing, and multi-agency coordination.',
     stats: ['31 queued', '19 routed', '7 urgent'],
   },
-  surveillanceRequests: {
-    eyebrow: 'Surveillance requests',
-    title: 'Surveillance and intelligence requests',
-    body: 'Coordinate formal requests for CCTV review, public tips, location checks, and incident intelligence collection.',
-    stats: ['12 pending', '5 approved', '2 urgent'],
-  },
   communityReports: {
     eyebrow: 'Community reports',
     title: 'Community intelligence intake',
     body: 'Review community submissions, suspicious activity reports, tip quality, and verification history.',
     stats: ['74 today', '28 verified', '11 duplicates'],
-  },
-  emergencyHotlines: {
-    eyebrow: 'Emergency hotlines',
-    title: 'Hotline monitoring panel',
-    body: 'Monitor emergency contact channels, intake status, escalation volume, and response recommendations.',
-    stats: ['119 police', '110 EMS', '211 child safety'],
   },
   agencyLicense: {
     eyebrow: 'Agency license',

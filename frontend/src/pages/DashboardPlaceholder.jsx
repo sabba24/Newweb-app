@@ -1,5 +1,6 @@
 import DashboardShell from '../components/DashboardShell';
 import AgencyRoutePanel from '../components/AgencyRoutePanel';
+import { getAccountGroup, getStoredAccountType } from '../lib/accountTypes';
 
 const content = {
   alerts: {
@@ -27,6 +28,16 @@ const content = {
     eyebrow: 'Sponsored visibility',
     body: 'Create and manage community safety promotions, business campaigns, and sponsored placements here soon.',
   },
+  campaigns: {
+    title: 'Campaigns',
+    eyebrow: 'Business campaigns',
+    body: 'Campaign planning, sponsored public safety visibility, and performance summaries will appear here soon.',
+  },
+  websiteTraffic: {
+    title: 'Website Traffic CTA',
+    eyebrow: 'Business growth',
+    body: 'Future website traffic call-to-action tools will help businesses route visitors from sponsored safety placements.',
+  },
   agencyLicense: {
     title: 'Agency license',
     eyebrow: 'Police / Agency',
@@ -46,16 +57,15 @@ const agencyTitles = {
   emergencyBroadcasts: ['Public alert transmission center', 'Emergency broadcasts'],
   responders: ['Responder availability grid', 'Responders'],
   dispatchQueue: ['Dispatch operations queue', 'Dispatch queue'],
-  surveillanceRequests: ['Surveillance and intelligence requests', 'Surveillance requests'],
   communityReports: ['Community intelligence intake', 'Community reports'],
-  emergencyHotlines: ['Hotline monitoring panel', 'Emergency hotlines'],
   agencyLicense: ['Agency license command', 'Agency license'],
   billing: ['Agency billing readiness', 'Billing'],
   settings: ['Secure agency settings', 'Settings'],
 };
 
 export default function DashboardPlaceholder({ type }) {
-  const isAgency = localStorage.getItem('account_type') === 'agency';
+  const accountType = getStoredAccountType();
+  const isAgency = getAccountGroup(accountType) === 'agency';
 
   if (isAgency) {
     const [title, eyebrow] = agencyTitles[type] || agencyTitles.activeIncidents;

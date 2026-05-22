@@ -5,6 +5,7 @@ import AuthShowcase from '../components/AuthShowcase';
 import AccountTypeSelector from '../components/AccountTypeSelector';
 import logo from '../assets/logo.svg';
 import { api, setAuthToken } from '../lib/api';
+import { saveAccountTypeFromAuthPayload, setStoredAccountType } from '../lib/accountTypes';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ export default function Register() {
 
       const { data } = await api.post('/register', payload);
       setAuthToken(data.token);
-      localStorage.setItem('account_type', form.account_type);
+      setStoredAccountType(form.account_type);
+      saveAccountTypeFromAuthPayload(data);
       navigate('/dashboard');
     } catch (err) {
       const msg = err?.response?.data?.message || (err?.response?.data?.errors && Object.values(err.response.data.errors)[0][0]);

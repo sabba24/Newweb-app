@@ -38,6 +38,8 @@ export default function App() {
         <Route path="/dashboard/billing" element={<DashboardPlaceholder type="billing" />} />
         <Route path="/dashboard/business-ads" element={<DashboardPlaceholder type="businessAds" />} />
         <Route path="/dashboard/promotions" element={<DashboardPlaceholder type="promotions" />} />
+        <Route path="/dashboard/campaigns" element={<DashboardPlaceholder type="campaigns" />} />
+        <Route path="/dashboard/website-traffic" element={<DashboardPlaceholder type="websiteTraffic" />} />
         <Route path="/dashboard/agency-license" element={<DashboardPlaceholder type="agencyLicense" />} />
         <Route path="/dashboard/verified-reports" element={<DashboardPlaceholder type="verifiedReports" />} />
         <Route path="/dashboard/active-incidents" element={<DashboardPlaceholder type="activeIncidents" />} />
@@ -45,9 +47,7 @@ export default function App() {
         <Route path="/dashboard/emergency-broadcasts" element={<DashboardPlaceholder type="emergencyBroadcasts" />} />
         <Route path="/dashboard/responders" element={<DashboardPlaceholder type="responders" />} />
         <Route path="/dashboard/dispatch-queue" element={<DashboardPlaceholder type="dispatchQueue" />} />
-        <Route path="/dashboard/surveillance-requests" element={<DashboardPlaceholder type="surveillanceRequests" />} />
         <Route path="/dashboard/community-reports" element={<DashboardPlaceholder type="communityReports" />} />
-        <Route path="/dashboard/emergency-hotlines" element={<DashboardPlaceholder type="emergencyHotlines" />} />
         <Route path="/dashboard/settings" element={<DashboardPlaceholder type="settings" />} />
       </Routes>
     </BrowserRouter>

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import AuthShowcase from '../components/AuthShowcase';
 import logo from '../assets/logo.svg';
 import { api, setAuthToken } from '../lib/api';
+import { saveAccountTypeFromAuthPayload } from '../lib/accountTypes';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,7 +20,8 @@ export default function Login() {
     try {
       const { data } = await api.post('/login', form);
       setAuthToken(data.token);
-      navigate('/');
+      saveAccountTypeFromAuthPayload(data);
+      navigate('/dashboard');
     } catch (err) {
       setError(err?.response?.data?.message || 'Login failed');
     } finally {

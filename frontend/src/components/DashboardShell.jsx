@@ -1,12 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
-
-const accountLabels = {
-  personal_free: 'Personal Free',
-  personal_pro: 'Personal Pro',
-  business: 'Business',
-  agency: 'Police / Agency',
-};
+import { getAccountGroup, getAccountLabel, getStoredAccountType, setStoredAccountType } from '../lib/accountTypes';
 
 const menus = {
   personal: [
@@ -22,6 +17,8 @@ const menus = {
     ['My Alerts', '/dashboard/alerts'],
     ['Business Ads', '/dashboard/business-ads'],
     ['Promotions', '/dashboard/promotions'],
+    ['Campaigns', '/dashboard/campaigns'],
+    ['Website Traffic CTA', '/dashboard/website-traffic'],
     ['Billing', '/dashboard/billing'],
     ['Upgrade', '/dashboard/billing'],
   ],
@@ -31,11 +28,9 @@ const menus = {
     ['Verified Reports', '/dashboard/verified-reports'],
     ['Missing Persons', '/dashboard/missing-persons'],
     ['Emergency Broadcasts', '/dashboard/emergency-broadcasts'],
-    ['Responders', '/dashboard/responders'],
     ['Dispatch Queue', '/dashboard/dispatch-queue'],
-    ['Surveillance Requests', '/dashboard/surveillance-requests'],
+    ['Responders', '/dashboard/responders'],
     ['Community Reports', '/dashboard/community-reports'],
-    ['Emergency Hotlines', '/dashboard/emergency-hotlines'],
     ['Agency License', '/dashboard/agency-license'],
     ['Billing', '/dashboard/billing'],
     ['Settings', '/dashboard/settings'],
@@ -43,16 +38,50 @@ const menus = {
 };
 
 function menuFor(accountType) {
-  if (accountType === 'business') return menus.business;
-  if (accountType === 'agency') return menus.agency;
-  return menus.personal;
+  return menus[getAccountGroup(accountType)];
+}
+
+function DemoAccountSwitcher({ accountType, isAgency }) {
+  return (
+    <label className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-black uppercase tracking-wide ring-1 ${
+      isAgency ? 'bg-slate-900 text-blue-100 ring-blue-300/20' : 'bg-white text-slate-600 ring-slate-200'
+    }`}>
+      Demo role
+      <select
+        value={accountType}
+        onChange={(event) => setStoredAccountType(event.target.value)}
+        className={`rounded-full border px-2 py-1 text-xs font-black normal-case outline-none ${
+          isAgency ? 'border-slate-700 bg-slate-950 text-white' : 'border-slate-200 bg-slate-50 text-slate-900'
+        }`}
+      >
+        <option value="personal_free">Personal Free</option>
+        <option value="personal_pro">Personal Pro</option>
+        <option value="business">Business Account</option>
+        <option value="agency">Police / Agency</option>
+      </select>
+    </label>
+  );
 }
 
 export default function DashboardShell({ title, eyebrow = 'Dashboard', children }) {
-  const accountType = localStorage.getItem('account_type') || 'personal_free';
-  const accountLabel = accountLabels[accountType] || accountLabels.personal_free;
+  const [accountType, setAccountType] = useState(getStoredAccountType());
+
+  useEffect(() => {
+    const syncAccountType = () => setAccountType(getStoredAccountType());
+
+    window.addEventListener('storage', syncAccountType);
+    window.addEventListener('account-type-change', syncAccountType);
+
+    return () => {
+      window.removeEventListener('storage', syncAccountType);
+      window.removeEventListener('account-type-change', syncAccountType);
+    };
+  }, []);
+
+  const accountLabel = getAccountLabel(accountType);
   const menu = menuFor(accountType);
-  const isAgency = accountType === 'agency';
+  const isAgency = getAccountGroup(accountType) === 'agency';
+  const displayTitle = isAgency && title.includes('Welcome') ? 'Agency Operations Center' : title;
 
   const navClass = ({ isActive }) =>
     isAgency
@@ -67,9 +96,9 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
 
   if (isAgency) {
     return (
-      <div className="min-h-screen bg-[#05070d] bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(239,68,68,0.1),transparent_30%)]">
+      <div className="min-h-screen bg-[#05070d] bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(239,68,68,0.12),transparent_32%)]">
         <div className="container-premium py-5">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-slate-800 bg-slate-950/92 p-4 shadow-[0_18px_70px_rgba(2,6,23,0.38)] backdrop-blur">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-slate-800 bg-slate-950/92 p-4 shadow-[0_18px_70px_rgba(2,6,23,0.42)] backdrop-blur">
             <Link to="/" className="flex items-center gap-3">
               <span className="rounded-2xl bg-white p-2">
                 <img src={logo} alt="876Alert" className="h-[38px] w-[150px] object-contain" />
@@ -77,6 +106,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
               <span className="hidden text-xs font-black uppercase tracking-[0.24em] text-blue-200 sm:block">Secure agency console</span>
             </Link>
             <div className="flex flex-wrap items-center gap-3">
+              <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
               <span className="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-200">
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.9)]" />
                 Live system secure
@@ -89,14 +119,14 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
           </div>
 
           <div className="grid gap-5 lg:grid-cols-[310px_1fr]">
-            <aside className="rounded-[2rem] border border-slate-800 bg-slate-950 p-4 shadow-[0_24px_80px_rgba(2,6,23,0.36)] lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto">
+            <aside className="rounded-[2rem] border border-slate-800 bg-slate-950 p-4 shadow-[0_24px_80px_rgba(2,6,23,0.38)] lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto">
               <div className="rounded-3xl border border-blue-400/20 bg-[linear-gradient(135deg,#0b1729,#05070d)] p-5 text-white">
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-300">Command access</p>
                 <h2 className="mt-2 text-2xl font-black">Police / Agency</h2>
                 <p className="mt-2 text-sm font-semibold leading-6 text-slate-400">High-authority emergency response tools and verified report operations.</p>
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   <span className="rounded-2xl bg-red-500/10 px-3 py-2 text-center text-xs font-black text-red-200 ring-1 ring-red-300/20">L-3 Alert</span>
-                  <span className="rounded-2xl bg-emerald-500/10 px-3 py-2 text-center text-xs font-black text-emerald-200 ring-1 ring-emerald-300/20">Online</span>
+                  <span className="rounded-2xl bg-emerald-500/10 px-3 py-2 text-center text-xs font-black text-emerald-200 ring-1 ring-emerald-300/20">Licensed</span>
                 </div>
               </div>
 
@@ -110,9 +140,9 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
             </aside>
 
             <main className="min-w-0">
-              <div className="mb-5 rounded-[2rem] border border-slate-800 bg-slate-950/92 p-6 shadow-[0_20px_70px_rgba(2,6,23,0.28)] sm:p-8">
+              <div className="mb-5 rounded-[2rem] border border-slate-800 bg-slate-950/92 p-6 shadow-[0_20px_70px_rgba(2,6,23,0.3)] sm:p-8">
                 <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-300">{eyebrow}</p>
-                <h1 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">{title}</h1>
+                <h1 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">{displayTitle}</h1>
               </div>
               {typeof children === 'function' ? children({ accountType, accountLabel }) : children}
             </main>
@@ -129,7 +159,8 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="876Alert" className="h-[42px] w-[166px] object-contain" />
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
             <span className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
               {accountLabel}
             </span>
@@ -138,7 +169,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
-          <aside className="rounded-[2rem] bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)]">
+          <aside className="rounded-[2rem] bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto">
             <div className="rounded-3xl bg-emerald-950 p-5 text-white">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-yellow-300">Account</p>
               <h2 className="mt-2 text-2xl font-black">{accountLabel}</h2>
@@ -157,7 +188,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
           <main className="min-w-0">
             <div className="mb-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100 sm:p-8">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">{eyebrow}</p>
-              <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{title}</h1>
+              <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{displayTitle}</h1>
             </div>
             {typeof children === 'function' ? children({ accountType, accountLabel }) : children}
           </main>
