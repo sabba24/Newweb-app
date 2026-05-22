@@ -61,7 +61,11 @@ textarea {
 }
 
 .container-nav,
-.container-hero,
+.container-hero {
+  width: min(100% - 24px, 1680px);
+  margin-inline: auto;
+}
+
 .container-premium {
   width: min(100% - 40px, 1600px);
   margin-inline: auto;
