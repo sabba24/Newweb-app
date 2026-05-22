@@ -5,6 +5,7 @@ export const accountTypeLabels = {
   personal_pro: 'Personal Pro',
   business: 'Business Account',
   agency: 'Police / Agency',
+  admin: 'Admin',
 };
 
 export function normalizeAccountType(value) {
@@ -20,6 +21,10 @@ export function normalizeAccountType(value) {
 
   if (['agency', 'police', 'police_agency', 'police-agency', 'police / agency'].includes(normalized)) {
     return 'agency';
+  }
+
+  if (['admin', 'administrator', 'sysadmin'].includes(normalized)) {
+    return 'admin';
   }
 
   return 'personal_free';
@@ -43,7 +48,7 @@ export function getAccountLabel(value) {
 export function getAccountGroup(value) {
   const accountType = normalizeAccountType(value);
 
-  if (accountType === 'agency') return 'agency';
+  if (accountType === 'agency' || accountType === 'admin') return 'agency';
   if (accountType === 'business') return 'business';
 
   return 'personal';
