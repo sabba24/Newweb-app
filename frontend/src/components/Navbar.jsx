@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
+import CountrySelector from './CountrySelector';
 import { setAuthToken } from '../lib/api';
 
 export default function Navbar() {
@@ -44,6 +45,8 @@ export default function Navbar() {
               <NavLink to="/contact" className={navClass}>Contact</NavLink>
             </nav>
 
+            <CountrySelector />
+
             <div className="flex shrink-0 items-center gap-2">
               {hasToken ? (
                 <div className="relative">
@@ -82,6 +85,10 @@ export default function Navbar() {
         {open && (
           <div className="pb-4 lg:hidden">
             <div className="rounded-3xl bg-white p-3 shadow-xl ring-1 ring-slate-100">
+              <div className="mb-3">
+                <CountrySelector compact />
+              </div>
+
               <div className="grid gap-1 text-sm font-extrabold">
                 <Link to="/" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Home</Link>
                 <a href="/#missing" onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-slate-700 hover:bg-emerald-50">Missing Persons</a>

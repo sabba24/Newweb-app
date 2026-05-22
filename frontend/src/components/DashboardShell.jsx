@@ -1,6 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.svg';
+import CountrySelector from './CountrySelector';
+import useSelectedCountry from '../hooks/useSelectedCountry';
 import { getAccountGroup, getAccountLabel, getStoredAccountType, setStoredAccountType } from '../lib/accountTypes';
 
 const menus = {
@@ -130,6 +132,7 @@ function AgencySidebar({ menu, navClass, open, onClose }) {
 }
 
 export default function DashboardShell({ title, eyebrow = 'Dashboard', children }) {
+  const { country } = useSelectedCountry();
   const [accountType, setAccountType] = useState(getStoredAccountType());
   const [agencyMenuOpen, setAgencyMenuOpen] = useState(false);
 
@@ -182,12 +185,13 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
                   ☰
                 </button>
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">876Alert Secure Agency Console</p>
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">876Alert Secure Agency Console · {country.flag} {country.name}</p>
                   <h1 className="text-xl font-black text-slate-950 sm:text-2xl">{displayTitle}</h1>
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
+                <CountrySelector compact />
                 <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
                 <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.85)]" />
@@ -196,9 +200,6 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
                 <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-100">
                   {accountLabel}
                 </span>
-                <button className="grid h-11 w-11 place-items-center rounded-full bg-white text-lg shadow-sm ring-1 ring-slate-200" aria-label="Notifications">
-                  🔔
-                </button>
                 <Link to="/" className="btn btn-outline !min-h-10 !px-4 !py-2 text-xs">Back to site</Link>
               </div>
             </div>
@@ -224,6 +225,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
             <img src={logo} alt="876Alert" className="h-[42px] w-[166px] object-contain" />
           </Link>
           <div className="flex flex-wrap items-center gap-3">
+            <CountrySelector compact />
             <DemoAccountSwitcher accountType={accountType} isAgency={isAgency} />
             <span className={`rounded-full px-4 py-2 text-xs font-black uppercase tracking-wide ring-1 ${
               isBusiness ? 'bg-slate-100 text-slate-800 ring-slate-200' : 'bg-emerald-50 text-emerald-700 ring-emerald-100'
@@ -240,7 +242,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
               <p className="text-xs font-black uppercase tracking-[0.18em] text-yellow-300">{isBusiness ? 'Business Account' : 'Community Account'}</p>
               <h2 className="mt-2 text-2xl font-black">{accountLabel}</h2>
               <p className="mt-2 text-sm font-semibold leading-6 text-white/80">
-                {isBusiness ? 'Manage ads, promotions, billing, and sponsored visibility.' : 'Create alerts, track usage, and access safety tools.'}
+                {country.flag} {country.name} · {isBusiness ? 'Manage ads, promotions, billing, and sponsored visibility.' : 'Create alerts, track usage, and access safety tools.'}
               </p>
             </div>
 
@@ -255,7 +257,7 @@ export default function DashboardShell({ title, eyebrow = 'Dashboard', children 
 
           <main className="min-w-0">
             <div className="mb-5 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100 sm:p-8">
-              <p className={`text-sm font-black uppercase tracking-[0.18em] ${isBusiness ? 'text-slate-700' : 'text-emerald-700'}`}>{eyebrow}</p>
+              <p className={`text-sm font-black uppercase tracking-[0.18em] ${isBusiness ? 'text-slate-700' : 'text-emerald-700'}`}>{eyebrow} · {country.flag} {country.name}</p>
               <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{displayTitle}</h1>
             </div>
             {typeof children === 'function' ? children({ accountType, accountLabel }) : children}

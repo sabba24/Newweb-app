@@ -55,14 +55,14 @@ export default function MissingPersonDetail() {
               <div>
                 <div className="flex flex-wrap gap-2">
                   {person.priority && <span className="badge bg-red-50 text-red-700 ring-1 ring-red-100">Priority Alert</span>}
-                  <span className="badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">Community Report</span>
+                  <span className="badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">{person.flag} {person.country}</span>
                 </div>
 
                 <h1 className="mt-5 text-4xl font-black leading-tight tracking-[-0.045em] text-slate-950 sm:text-5xl">
                   {person.name}
                 </h1>
                 <p className="mt-3 text-lg font-bold text-emerald-700">
-                  {person.age} years · {person.parish}
+                  {person.age} years · {person.region}
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -96,7 +96,7 @@ export default function MissingPersonDetail() {
                 </div>
 
                 <div className="mt-6 rounded-3xl bg-red-50 p-5 ring-1 ring-red-100">
-                  <p className="font-black text-red-800">If this is an emergency, call 119 immediately.</p>
+                  <p className="font-black text-red-800">If this is an emergency, call local emergency services immediately.</p>
                   <p className="mt-2 text-sm font-semibold leading-6 text-red-700">Share only verified sightings and avoid approaching anyone in a way that may create danger.</p>
                 </div>
               </div>

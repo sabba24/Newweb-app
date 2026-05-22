@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useSelectedCountry from '../hooks/useSelectedCountry';
 import { api } from '../lib/api';
-import { demoMissingPersons, parishes } from '../lib/demoData';
+import { countryRegions, demoMissingPersons } from '../lib/demoData';
 import SkeletonCard from './SkeletonCard';
 
 const statusStyles = {
@@ -26,7 +27,12 @@ function normalizeApiPerson(person, index) {
     ...fallback,
     ...person,
     slug: person.slug || fallback.slug || `${slugify(person.name || fallback.name)}-${person.id || fallback.id}`,
-    parish: person.parish || fallback.parish,
+    country: person.country || fallback.country,
+    countryCode: person.countryCode || person.country_code || fallback.countryCode,
+    flag: person.flag || fallback.flag,
+    region: person.region || person.parish || fallback.region,
+    parish: person.parish || person.region || fallback.parish,
+    city: person.city || fallback.city,
     contact_number: person.contact_number || fallback.contact_number,
     photo_url: person.photo_url || fallback.photo_url,
     status: person.status || fallback.status || 'missing',
@@ -35,10 +41,11 @@ function normalizeApiPerson(person, index) {
 }
 
 export default function MissingPersonsPreview() {
+  const { country, countryCode } = useSelectedCountry();
   const [items, setItems] = useState(demoMissingPersons);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [parish, setParish] = useState('All');
+  const [region, setRegion] = useState('All');
   const [visible, setVisible] = useState(12);
 
   useEffect(() => {
@@ -62,26 +69,35 @@ export default function MissingPersonsPreview() {
     };
   }, []);
 
+  useEffect(() => {
+    setRegion('All');
+    setVisible(12);
+  }, [countryCode]);
+
+  const regions = countryRegions[countryCode] || [];
+
   const filteredItems = useMemo(() => {
     return items.filter((person) => {
-      const searchable = `${person.name} ${person.parish} ${person.last_seen_location} ${person.description}`.toLowerCase();
+      if (person.countryCode !== countryCode) return false;
+
+      const searchable = `${person.name} ${person.country} ${person.region} ${person.parish} ${person.city} ${person.last_seen_location} ${person.description}`.toLowerCase();
       const matchesQuery = searchable.includes(query.trim().toLowerCase());
-      const matchesParish = parish === 'All' || person.parish === parish || person.last_seen_location?.includes(parish);
-      return matchesQuery && matchesParish;
+      const matchesRegion = region === 'All' || person.region === region || person.parish === region || person.last_seen_location?.includes(region);
+      return matchesQuery && matchesRegion;
     });
-  }, [items, query, parish]);
+  }, [items, query, region, countryCode]);
 
   return (
     <section id="missing" className="bg-white section-padding">
       <div className="container-premium">
         <div className="mb-9 grid gap-6 lg:grid-cols-[1fr_0.72fr] lg:items-end">
           <div className="max-w-4xl">
-            <span className="section-eyebrow">Missing persons</span>
+            <span className="section-eyebrow">{country.flag} Missing persons</span>
             <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-slate-950 sm:text-4xl lg:text-5xl">
-              Search recent public reports
+              Missing persons in {country.name}
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-              Browse active reports by parish and share verified information with the listed contact or local authorities.
+              Browse active reports in {country.name} by region and share verified information with the listed contact or local authorities.
             </p>
           </div>
 
@@ -89,13 +105,13 @@ export default function MissingPersonsPreview() {
             <div className="grid gap-3 sm:grid-cols-[1fr_12rem]">
               <input
                 className="input-premium"
-                placeholder="Search name, location, parish..."
+                placeholder="Search name, location, region..."
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <select className="input-premium" value={parish} onChange={(event) => setParish(event.target.value)}>
+              <select className="input-premium" value={region} onChange={(event) => setRegion(event.target.value)}>
                 <option>All</option>
-                {parishes.map((item) => (
+                {regions.map((item) => (
                   <option key={item}>{item}</option>
                 ))}
               </select>
@@ -126,7 +142,7 @@ export default function MissingPersonsPreview() {
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-base font-black leading-tight text-slate-950">{person.name}</h3>
                     <p className="mt-1 text-xs font-black uppercase tracking-wide text-emerald-700">
-                      {person.age} years · {person.parish}
+                      {person.age} years · {person.flag} {person.region}
                     </p>
 
                     <div className="mt-3 space-y-1.5 text-sm leading-5 text-slate-600">
@@ -153,7 +169,7 @@ export default function MissingPersonsPreview() {
 
             <div className="mt-9 flex flex-col items-center gap-3">
               <p className="text-sm font-bold text-slate-500">
-                Showing {Math.min(visible, filteredItems.length)} of {filteredItems.length} reports
+                Showing {Math.min(visible, filteredItems.length)} of {filteredItems.length} reports in {country.name}
               </p>
               {visible < filteredItems.length && (
                 <button onClick={() => setVisible((count) => count + 12)} className="btn btn-outline sm:w-auto">
