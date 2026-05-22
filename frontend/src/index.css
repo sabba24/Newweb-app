@@ -123,6 +123,11 @@ textarea {
   transform: translateY(-1px);
 }
 
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.28);
+}
+
 .btn-primary {
   color: #ffffff;
   background: linear-gradient(135deg, var(--green), #00b85a);

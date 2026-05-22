@@ -29,8 +29,6 @@ export const countryMissingStats = SUPPORTED_COUNTRIES.map((country) => ({
   total: country.totalMissingReports,
 }));
 
-const countryByCode = (code) => SUPPORTED_COUNTRIES.find((country) => country.code === code) || SUPPORTED_COUNTRIES[0];
-
 const slugify = (value) =>
   value
     .toLowerCase()
