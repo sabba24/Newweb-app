@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
+import { demoAlerts } from '../lib/demoData';
 
 const badgeClass = (severity) => {
   switch (severity) {
@@ -18,35 +19,46 @@ export default function EmergencyAlertsSection() {
 
   useEffect(() => {
     let mounted = true;
-    api.get('/alerts?limit=5').then((res) => {
-      if (mounted) setItems(res.data || []);
-    }).catch(() => {}).finally(() => setLoading(false));
+    api.get('/alerts?limit=5')
+      .then((res) => {
+        const data = Array.isArray(res.data) && res.data.length ? res.data : demoAlerts;
+        if (mounted) setItems(data);
+      })
+      .catch(() => setItems(demoAlerts))
+      .finally(() => setLoading(false));
     return () => { mounted = false; };
   }, []);
 
   return (
-    <section id="alerts" className="py-16 bg-emerald-50/50">
+    <section id="alerts" className="py-20 bg-emerald-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Emergency Alerts</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Emergency Alerts</h2>
             <p className="text-gray-600">Stay up to date and stay safe.</p>
           </div>
         </div>
         {loading ? (
-          <div className="text-center text-gray-500">Loading</div>
+          <div className="text-center text-gray-500">Loading…</div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {items.map((a) => (
-              <div key={a.id} className="rounded-xl border bg-white p-4 shadow-sm">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-semibold text-lg">{a.title}</h3>
-                    <p className="text-gray-700 mt-1">{a.message}</p>
+              <article key={a.id} className="rounded-xl border bg-white overflow-hidden shadow-sm">
+                {a.image && (
+                  <div className="aspect-[16/10] bg-gray-50">
+                    <img src={a.image} alt="" className="w-full h-full object-cover"/>
                   </div>
-                  <span className={`text-xs px-2 py-1 rounded-md ${badgeClass(a.severity)}`}>{a.severity}</span>
+                )}
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="font-semibold text-lg text-gray-900">{a.title}</h3>
+                      <p className="text-gray-700 mt-1">{a.message}</p>
+                    </div>
+                    <span className={`text-xs px-2 py-1 rounded-md ${badgeClass(a.severity)}`}>{a.severity}</span>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         )}

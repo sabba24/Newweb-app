@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="48" viewBox="0 0 192 48" fill="none">
+  <rect width="192" height="48" rx="12" fill="white"/>
+  <g>
+    <rect x="8" y="8" width="32" height="32" rx="8" fill="#009B3A"/>
+    <path d="M12 28 L20 16 L28 28 Z" fill="#FED100" opacity="0.9"/>
+    <path d="M20 32 L28 20 L36 32 Z" fill="#000000" opacity="0.9"/>
+  </g>
+  <text x="52" y="31" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-size="24" font-weight="800" fill="#000000">876</text>
+  <text x="98" y="31" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-size="24" font-weight="800" fill="#009B3A">Alert</text>
+</svg>

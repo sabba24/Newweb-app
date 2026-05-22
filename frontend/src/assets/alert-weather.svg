@@ -1,0 +1,9 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400' fill='none'>
+  <rect width='600' height='400' fill='#DBEAFE'/>
+  <g transform='translate(150,80)'>
+    <ellipse cx='200' cy='80' rx='140' ry='70' fill='#93C5FD'/>
+    <circle cx='120' cy='80' r='60' fill='#BFDBFE'/>
+    <circle cx='240' cy='80' r='60' fill='#BFDBFE'/>
+    <polygon points='200,140 230,200 210,200 240,260 190,200 210,200' fill='#2563EB'/>
+  </g>
+</svg>

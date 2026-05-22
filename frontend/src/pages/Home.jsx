@@ -2,6 +2,9 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import MissingPersonsPreview from '../components/MissingPersonsPreview';
 import EmergencyAlertsSection from '../components/EmergencyAlertsSection';
+import Stats from '../components/Stats';
+import HowItWorks from '../components/HowItWorks';
+import TrustSafety from '../components/TrustSafety';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -10,8 +13,11 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <Stats />
         <MissingPersonsPreview />
         <EmergencyAlertsSection />
+        <HowItWorks />
+        <TrustSafety />
       </main>
       <Footer />
     </div>
